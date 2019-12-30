@@ -200,6 +200,33 @@ class Validation
 
     ];
 
+		public $department = [
+				'department_name' => [
+						'label'  => 'Department Name',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Department Name field is required.'
+						]
+				],
+
+				'description' => [
+						'label'  => 'Department Description',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Department desciption field is required.'
+						]
+				],
+
+				'dept_head_id' => [
+						'label'  => 'Department Head',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Department Head field is required.'
+						]
+				],
+
+		];
+
 	//--------------------------------------------------------------------
 	// Rules
 	//--------------------------------------------------------------------
