@@ -40,14 +40,13 @@ class Migrate extends \CodeIgniter\Controller
 
     public function seeder()
     {
-        // die("here");
         $seeder = \Config\Database::seeder();
-        $seeder->call('RolesSeeder');
-        $seeder->call('UsersSeeder');
-        $seeder->call('ModuleSeeder');
-        $seeder->call('PermissionSeeder');
-        $seeder->call('DepartmentsSeeder');
-        $seeder->call('ParameterSectionsSeeder'); 
-
+        // $seeder->call('RolesSeeder');
+        // $seeder->call('UsersSeeder');
+        // $seeder->call('ModuleSeeder');
+        // $seeder->call('PermissionSeeder');
+        // $seeder->call('DepartmentsSeeder');
+        // $seeder->call('ParameterSectionsSeeder');
+        $seeder->call('PermissionSystemSettingsSeeder');
     }
 }
