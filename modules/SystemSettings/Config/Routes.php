@@ -8,3 +8,13 @@ $routes->group('departments', ['namespace' => 'Modules\SystemSettings\Controller
     $routes->match(['get', 'post'], 'edit/(:num)', 'Departments::edit_department/$1');
     $routes->delete('delete/(:num)', 'Departments::delete_department/$1');
 });
+
+$routes->group('areas', ['namespace' => 'Modules\SystemSettings\Controllers'], function($routes)
+{
+    $routes->get('/', 'Areas::index');
+    $routes->get('(:num)', 'Areas::index/$1');
+    $routes->get('show/(:num)', 'Areas::show_area/$1');
+    $routes->match(['get', 'post'], 'add', 'Areas::add_area');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'Areas::edit_area/$1');
+    $routes->delete('delete/(:num)', 'Areas::delete_area/$1');
+});

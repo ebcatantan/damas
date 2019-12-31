@@ -114,7 +114,7 @@ class PermissionSystemSettingsSeeder extends \CodeIgniter\Database\Seeder
                         'allowed_roles' => '[1]',
                         'link_icon' => '',
                         'table_name' => 'areas',
-                        'func_action' => 'add',
+                        'func_action' => 'show',
                         'func_type' => 3,
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')

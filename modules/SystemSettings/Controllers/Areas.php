@@ -1,12 +1,12 @@
 <?php
 namespace Modules\SystemSettings\Controllers;
 
-use Modules\SystemSettings\Models\DepartmentsModel;
+use Modules\SystemSettings\Models\AreasModel;
 use Modules\UserManagement\Models\PermissionsModel;
 use Modules\UserManagement\Models\UsersModel;
 use App\Controllers\BaseController;
 
-class Departments extends BaseController
+class Areas extends BaseController
 {
 	//private $permissions;
 
@@ -20,89 +20,89 @@ class Departments extends BaseController
 
     public function index($offset = 0)
     {
-    	$this->hasPermissionRedirect('list-departments');
+    	$this->hasPermissionRedirect('list-area');
 
-    	$model = new DepartmentsModel();
-
+    	$model = new AreasModel();
     	 //kailangan ito para sa pagination
-       	$data['all_items'] = $model->getDepartmentWithCondition(['status'=> 'a']);
+       	$data['all_items'] = $model->getAreaWithCondition(['status'=> 'a']);
        	$data['offset'] = $offset;
 
-        $data['departments'] = $model->getDepartmentWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
+        $data['areas'] = $model->getAreaWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
+				// die("here");
 
-        $data['function_title'] = "Departments List";
-        $data['viewName'] = 'Modules\SystemSettings\Views\departments\index';
+        $data['function_title'] = "Area List";
+        $data['viewName'] = 'Modules\SystemSettings\Views\areas\index';
         echo view('App\Views\theme\index', $data);
     }
 
-    public function show_department($id)
+    public function show_area($id)
 	 {
-		$this->hasPermissionRedirect('show-department');
-		$data['permissions'] = $this->permissions;
 
+		$this->hasPermissionRedirect('show-area');
+		$data['permissions'] = $this->permissions;
 		$user_model = new UsersModel();
 		$data['users'] = $user_model->findAll();
 
-		$model = new DepartmentsModel();
+		$model = new AreasModel();
 
-		$data['department'] = $model->getDepartmentWithCondition(['id' => $id]);
-		$data['function_title'] = "Departments Details";
-    $data['viewName'] = 'Modules\SystemSettings\Views\departments\departmentDetails';
+		$data['area'] = $model->getAreaWithCondition(['id' => $id]);
+		$data['function_title'] = "Area Details";
+    $data['viewName'] = 'Modules\SystemSettings\Views\areas\areaDetails';
     echo view('App\Views\theme\index', $data);
 	}
 
-    public function add_department()
+    public function add_area()
     {
-    	$this->hasPermissionRedirect('add-role');
+    	$this->hasPermissionRedirect('add-area');
     	$permissions_model = new PermissionsModel();
     	$data['permissions'] = $this->permissions;
-
 			$user_model = new UsersModel();
 			$data['users'] = $user_model->findAll();
 
     	helper(['form', 'url']);
-    	$model = new DepartmentsModel();
+    	$model = new AreasModel();
+			// die("here");
 
     	if(!empty($_POST))
     	{
-	    	if (!$this->validate('department'))
+	    	if (!$this->validate('area'))
 		    {
 		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['function_title'] = "Adding Department";
-		        $data['viewName'] = 'Modules\SystemSettings\Views\departments\frmDepartment';
+		        $data['function_title'] = "Adding Area";
+		        $data['viewName'] = 'Modules\SystemSettings\Views\areas\frmArea';
 		        echo view('App\Views\theme\index', $data);
 		    }
 		    else
 		    {
 					//print_r($_POST); die("takte");
-		        if($model->addDepartment($_POST))
+		        if($model->addArea($_POST))
 		        {
 		        	$_SESSION['success'] = 'You have added a new record';
 							$this->session->markAsFlashdata('success');
-		        	return redirect()->to(base_url('departments'));
+		        	return redirect()->to(base_url('areas'));
 		        }
 		        else
 		        {
 		        	$_SESSION['error'] = 'You have an error in adding a new record';
 							$this->session->markAsFlashdata('error');
-		        	return redirect()->to(base_url('departments'));
+		        	return redirect()->to(base_url('areas'));
 		        }
 		    }
     	}
     	else
     	{
 
-	    	  $data['function_title'] = "Adding Department";
-	        $data['viewName'] = 'Modules\SystemSettings\Views\departments\frmDepartment';
+	    	  $data['function_title'] = "Adding Area";
+	        $data['viewName'] = 'Modules\SystemSettings\Views\areas\frmArea';
 	        echo view('App\Views\theme\index', $data);
     	}
     }
 
-    public function edit_department($id)
+    public function edit_area($id)
     {
-    	$this->hasPermissionRedirect('edit-department');
+    	$this->hasPermissionRedirect('edit-area');
     	helper(['form', 'url']);
-    	$model = new DepartmentsModel();
+    	$model = new AreasModel();
     	$data['rec'] = $model->find($id);
 
 			$user_model = new UsersModel();
@@ -114,43 +114,43 @@ class Departments extends BaseController
 
     	if(!empty($_POST))
     	{
-	    	if (!$this->validate('department'))
+	    	if (!$this->validate('area'))
 		    {
 		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['function_title'] = "Modify Department";
-		        $data['viewName'] = 'Modules\SystemSettings\Views\departments\frmDepartment';
+		        $data['function_title'] = "Modify Area";
+		        $data['viewName'] = 'Modules\SystemSettings\Views\areas\frmArea';
 		        echo view('App\Views\theme\index', $data);
 		    }
 		    else
 		    {
-		    	if($model->editDepartments($_POST, $id))
+		    	if($model->editArea($_POST, $id))
 		        {
 		        	$_SESSION['success'] = 'You have updated a record';
 							$this->session->markAsFlashdata('success');
-		        	return redirect()->to(base_url('departments'));
+		        	return redirect()->to(base_url('areas'));
 		        }
 		        else
 		        {
 		        	$_SESSION['error'] = 'You an errot in updating a record';
 					$this->session->markAsFlashdata('error');
-		        	return redirect()->to( base_url('departments'));
+		        	return redirect()->to( base_url('areas'));
 		        }
 		    }
     	}
     	else
     	{
-	    	$data['function_title'] = "Modify Department";
-	        $data['viewName'] = 'Modules\SystemSettings\Views\departments\frmDepartment';
+	    	$data['function_title'] = "Modify Area";
+	        $data['viewName'] = 'Modules\SystemSettings\Views\areas\frmArea';
 	        echo view('App\Views\theme\index', $data);
     	}
     }
 
-    public function delete_department($id)
+    public function delete_area($id)
     {
-    	$this->hasPermissionRedirect('delete-department');
+    	$this->hasPermissionRedirect('delete-area');
 
-    	$model = new DepartmentsModel();
-    	$model->deleteDepartment($id);
+    	$model = new AreasModel();
+    	$model->deleteArea($id);
     }
 
 }

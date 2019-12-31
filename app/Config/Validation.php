@@ -76,6 +76,41 @@ class Validation
 
     ];
 
+    public $area = [
+        'area_code' => [
+            'label'  => 'Area Code',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Area Code field is required.'
+            ]
+        ],
+
+        'area_name' => [
+            'label'  => 'Area Name',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Area Name field is required.'
+            ]
+        ],
+
+        'description' => [
+            'label'  => 'Area Description',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Area desciption field is required.'
+            ]
+        ],
+
+        'area_head_id' => [
+            'label'  => 'Area Head',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Area Head field is required.'
+            ]
+        ],
+
+    ];
+
 	public $user = [
         'lastname' => [
             'label'  => 'Lastname',

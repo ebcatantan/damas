@@ -12,7 +12,7 @@
         <span class="field-value"><?= ucfirst($department[0]['description']) ?></span>
       </div>
     </div>
-    <?php if(strtolower($department[0]['department_name']) != 'administration'): ?>
+    <?php if(strtolower($department[0]['dept_head_id']) != 1): ?>
     <div class="row">
       <div class="col-md-12">
         <span class="field">Department Head</span>
