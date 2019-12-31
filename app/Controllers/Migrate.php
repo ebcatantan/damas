@@ -1,8 +1,6 @@
 <?php
 namespace App\Controllers;
 
-//use App\Database\Seeds;
-
 class Migrate extends \CodeIgniter\Controller
 {
     public function index()
@@ -47,6 +45,7 @@ class Migrate extends \CodeIgniter\Controller
         // $seeder->call('PermissionSeeder');
         // $seeder->call('DepartmentsSeeder');
         // $seeder->call('ParameterSectionsSeeder');
-        $seeder->call('PermissionSystemSettingsSeeder');
+        // $seeder->call('PermissionSystemSettingsSeeder');
+        $seeder->call('PermissionDocumentsSeeder');
     }
 }

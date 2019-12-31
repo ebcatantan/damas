@@ -18,3 +18,13 @@ $routes->group('areas', ['namespace' => 'Modules\SystemSettings\Controllers'], f
     $routes->match(['get', 'post'], 'edit/(:num)', 'Areas::edit_area/$1');
     $routes->delete('delete/(:num)', 'Areas::delete_area/$1');
 });
+
+$routes->group('academic-programs', ['namespace' => 'Modules\SystemSettings\Controllers'], function($routes)
+{
+    $routes->get('/', 'Programs::index');
+    $routes->get('(:num)', 'Programs::index/$1');
+    $routes->get('show/(:num)', 'Programs::show_program/$1');
+    $routes->match(['get', 'post'], 'add', 'Programs::add_program');
+    $routes->match(['get', 'post'], 'edit/(:num)', 'Programs::edit_program/$1');
+    $routes->delete('delete/(:num)', 'Programs::delete_program/$1');
+});

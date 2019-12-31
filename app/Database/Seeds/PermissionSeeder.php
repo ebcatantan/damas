@@ -57,7 +57,7 @@ class PermissionSeeder extends \CodeIgniter\Database\Seeder
                     ],
                     [
                         'function_name' => 'list of users',
-                        'function_description' => 'list of users',
+                        'function_description' => 'users',
                         'slugs' => 'list-user',
                         'name_on_class' => 'index',
                         'page_title' => 'list of users',
@@ -137,7 +137,7 @@ class PermissionSeeder extends \CodeIgniter\Database\Seeder
                     ],
                     [
                         'function_name' => 'list of roles',
-                        'function_description' => 'list of roles',
+                        'function_description' => 'roles',
                         'slugs' => 'list-role',
                         'name_on_class' => 'index',
                         'page_title' => 'list of roles',

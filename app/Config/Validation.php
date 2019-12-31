@@ -73,7 +73,6 @@ class Validation
                 'required' => 'Landing Page field is required.'
             ]
         ],
-
     ];
 
     public $area = [
@@ -109,6 +108,50 @@ class Validation
             ]
         ],
 
+    ];
+
+    public $document_type = [
+        'document_type_code' => [
+            'label'  => 'Document Type Code',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Document Type Code field is required.'
+            ]
+        ],
+
+        'document_type_name' => [
+            'label'  => 'Document Type Name',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Document Type Name field is required.'
+            ]
+        ],
+
+        'description' => [
+            'label'  => 'Document Type Description',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Document Type desciption field is required.'
+            ]
+        ],
+    ];
+
+    public $academic_program = [
+        'program_name' => [
+            'label'  => 'Program Name',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Program Name field is required.'
+            ]
+        ],
+
+        'description' => [
+            'label'  => 'Academic Program Description',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Academic Program desciption field is required.'
+            ]
+        ],
     ];
 
 	public $user = [
