@@ -152,6 +152,14 @@ class Validation
                 'required' => 'Academic Program desciption field is required.'
             ]
         ],
+
+				'program_head_id' => [
+						'label'  => 'Program Head',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Program Head field is required.'
+						]
+				],
     ];
 
 	public $user = [

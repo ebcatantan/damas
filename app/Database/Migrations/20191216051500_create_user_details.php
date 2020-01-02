@@ -23,12 +23,16 @@ class CreateUserDetails extends \CodeIgniter\Database\Migration {
                                 'type'           => 'BIGINT'
                         ],
 
+                        'academic_program_id' => [
+                                'type'           => 'BIGINT'
+                        ],
+
                         'status' => [
                                 'type'           => 'CHAR',
                                 'constraint'     => '1',
                                 'default'        => 'a'
                         ],
-                        
+
                         'created_at' => [
                                 'type'           => 'DATETIME',
                                 'comment'        => 'Date of creation',

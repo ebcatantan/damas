@@ -28,6 +28,15 @@ if (! function_exists('name_on_system'))
 						case 'permissions':
 							$str = $list['function_name'];
 							break;
+						case 'areas':
+							$str = $list['area_code'].' - '.$list['area_name'];
+							break;
+						case 'departments':
+							$str = $list['department_name'];
+							break;
+						case 'academic_programs':
+							$str = $list['program_name'];
+							break;
 						default:
 							break;
 					}

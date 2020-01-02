@@ -22,6 +22,9 @@
         <ul class="navbar-nav ml-auto">
           <?php user_primary_links($_SESSION['userPermmissions']) ?>
           <li class="nav-item">
+            <a class="nav-link" href="#">Hi <?= ucwords($_SESSION['uname']) ?>!</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url() ?>logout"><i class="fas fa-power-off"></i></a>
           </li>
         </ul>

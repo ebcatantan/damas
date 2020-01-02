@@ -7,7 +7,7 @@ class ProgramsModel extends \CodeIgniter\Model
 {
     protected $table = 'academic_programs';
 
-    protected $allowedFields = ['program_name',  'description', 'status', 'created_at','updated_at', 'deleted_at'];
+    protected $allowedFields = ['program_name',  'description', 'program_head_id', 'status', 'created_at','updated_at', 'deleted_at'];
 
   public function getProgramWithCondition($conditions = [])
 	{

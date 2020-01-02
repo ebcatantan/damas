@@ -67,6 +67,26 @@ if (! function_exists('user_add_link'))
 	}
 }
 
+if (! function_exists('file_upload_link'))
+{
+	function file_upload_link($slugs, array $array_permissions, $name, $class)
+	{
+		foreach($array_permissions as $permission)
+		{
+			if($permission['slugs'] == $slugs && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
+			{
+				echo '<div class="col-md">';
+					echo '<a id = "'.$name.'" name="'.$name.'" href="'.base_url('academic-documents/'.$slugs) .'" class="'.$class.'">';
+		 	       echo '<i style="font-size: 3em" class="fas fa-file-upload"></i> <br>'.$permission['function_name'];
+		 	    echo '</a>';
+				echo '</div>';
+				break;
+			}
+		}
+
+	}
+}
+
 if (! function_exists('user_edit_link'))
 {
 	function user_edit_link(string $table, string $slugs, array $array_permissions, $id)

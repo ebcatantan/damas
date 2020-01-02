@@ -3,10 +3,12 @@ $routes->group('users', ['namespace' => 'Modules\UserManagement\Controllers'], f
 {
     $routes->get('/', 'Users::index');
     $routes->get('(:num)', 'Users::index/$1');
-    $routes->get('show/(:num)', 'Users::show_user/$1');
+    $routes->match(['get', 'post'], 'show/(:num)', 'Users::show_user/$1');
     $routes->get('own/(:num)', 'Users::user_own_profile/$1');
     //$routes->get('edit-own/(:num)', 'Users::user_edit_own_profile/$1');
     $routes->match(['get', 'post'], 'add', 'Users::add_user');
+    $routes->match(['get', 'post'], 'add-credentials', 'Users::add_credentials');
+    $routes->match(['get', 'post'], 'edit-credentials/(:num)', 'Users::edit_credentials/$1');
     $routes->match(['get', 'post'], 'edit/(:num)', 'Users::edit_user/$1');
     $routes->delete('delete/(:num)', 'Users::delete_user/$1');
 });

@@ -38,6 +38,29 @@
       </div>
       <div class="row">
         <div class="col-md-6 offset-md-3">
+          <div class="form-group">
+            <label for="program_head_id">Department Head</label>
+            <select name="program_head_id" class="form-control <?= $errors['program_head_id'] ? 'is-invalid':'is-valid' ?>">
+              <?php if(isset($rec['program_head_id'])): ?>
+                <option value="<?= $rec['program_head_id'] ?>"><?= ucwords(name_on_system($rec['program_head_id'], $users, 'users')) ?></option>
+              <?php else: ?>
+                <option value="">Select Program Head</option>
+              <?php endif; ?>
+
+              <?php foreach($users as $user): ?>
+                <option value="<?= $user['id'] ?>"><?= ucwords($user['firstname'].' '.$user['lastname']) ?></option>
+              <?php endforeach; ?>
+            </select>
+             <?php if($errors['program_head_id']): ?>
+                <div class="invalid-feedback">
+                  <?= $errors['program_head_id'] ?>
+                </div>
+              <?php endif; ?>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
           <button type="submit" class="btn btn-primary float-right">Submit</button>
         </div>
       </div>

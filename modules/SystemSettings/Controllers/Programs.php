@@ -3,7 +3,7 @@ namespace Modules\SystemSettings\Controllers;
 
 use Modules\SystemSettings\Models\ProgramsModel;
 use Modules\UserManagement\Models\PermissionsModel;
-// use Modules\UserManagement\Models\UsersModel;
+use Modules\UserManagement\Models\UsersModel;
 use App\Controllers\BaseController;
 
 class Programs extends BaseController
@@ -20,8 +20,8 @@ class Programs extends BaseController
 
     public function index($offset = 0)
     {
-
     	$this->hasPermissionRedirect('list-program');
+
     	$model = new ProgramsModel();
     	 //kailangan ito para sa pagination
        	$data['all_items'] = $model->getProgramWithCondition(['status'=> 'a']);
@@ -40,6 +40,9 @@ class Programs extends BaseController
 		$this->hasPermissionRedirect('show-program');
 		$data['permissions'] = $this->permissions;
 
+		$user_model = new UsersModel();
+		$data['users'] = $user_model->findAll();
+
 		$model = new ProgramsModel();
 
 		$data['academic_program'] = $model->getProgramWithCondition(['id' => $id]);
@@ -57,6 +60,8 @@ class Programs extends BaseController
     	helper(['form', 'url']);
     	$model = new ProgramsModel();
 
+			$user_model = new UsersModel();
+			$data['users'] = $user_model->findAll();
 
     	if(!empty($_POST))
     	{
@@ -100,6 +105,8 @@ class Programs extends BaseController
     	$data['rec'] = $model->find($id);
 
     	$data['permissions'] = $this->permissions;
+			$user_model = new UsersModel();
+			$data['users'] = $user_model->findAll();
 
     	if(!empty($_POST))
     	{

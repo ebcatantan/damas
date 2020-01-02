@@ -20,13 +20,17 @@ class CreatePrograms extends \CodeIgniter\Database\Migration {
                                 'type'           => 'TEXT',
                                 'null'           => TRUE,
                         ],
-
+                        'program_head_id'          => [
+                                'type'           => 'BIGINT',
+                                'constraint'     => '20',
+                                'comment'       => 'user id of the program head',
+                        ],
                         'status' => [
                                 'type'           => 'CHAR',
                                 'constraint'     => '1',
                                 'default'        => 'a'
                         ],
-                        
+
                         'created_at' => [
                                 'type'           => 'DATETIME',
                                 'comment'        => 'Date of creation',

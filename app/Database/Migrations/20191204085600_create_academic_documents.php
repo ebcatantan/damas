@@ -12,8 +12,13 @@ class CreateAcademicDocuments extends \CodeIgniter\Database\Migration {
                                 'auto_increment' => TRUE
                         ],
 
-                        'title'       => [
+                        'doc_name'       => [
                                 'type'           => 'VARCHAR',
+                                'constraint'     => '255',
+                        ],
+
+                        'doc_path'       => [
+                                'type'           => 'text',
                                 'constraint'     => '255',
                         ],
 
@@ -32,10 +37,12 @@ class CreateAcademicDocuments extends \CodeIgniter\Database\Migration {
 
                         'department_id'       => [
                                 'type'           => 'BIGINT',
+                                'null'           => TRUE
                         ],
 
                         'academic_program_id'       => [
                                 'type'           => 'BIGINT',
+                                'null'           => TRUE
                         ],
 
                         'uploader_id'       => [

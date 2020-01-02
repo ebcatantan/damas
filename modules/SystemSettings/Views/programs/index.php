@@ -23,7 +23,7 @@
       <?php foreach($academic_programs as $academic_program): ?>
       <tr id="<?php echo $academic_program['id']; ?>">
         <th scope="row"><?= $cnt++ ?></th>
-        <td><?= ucwords($academic_program['program_name']) ?></td>
+        <td><?= strtoupper($academic_program['program_name']) ?></td>
         <td><?= ucwords($academic_program['description']) ?></td>
         <td class="text-center">
           <?php

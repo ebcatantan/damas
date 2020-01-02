@@ -1,3 +1,12 @@
+.user-credentials
+{
+		display: inline-block;
+		background-color: #aaa;
+		width: 30%;
+		padding: 5px;
+		margin-bottom: 2px
+}
+
 .primary-menu-top
 {
 		margin-right: 5px !important;

@@ -5,7 +5,7 @@ class RolesSeeder extends \CodeIgniter\Database\Seeder
         public $table = 'roles';
 
         public function run()
-        { 
+        {
                 $data = [
                     [
                         'role_name' => 'administrator',
@@ -16,8 +16,29 @@ class RolesSeeder extends \CodeIgniter\Database\Seeder
                     ],
                     [
                         'role_name' => 'user',
-                        'function_id' => 2,
+                        'function_id' => 1,
                         'description' => 'User Related Role',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'role_name' => 'area user',
+                        'function_id' => 1,
+                        'description' => 'area user',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'role_name' => 'deparment user',
+                        'function_id' => 1,
+                        'description' => 'deparment user',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'role_name' => 'academic program',
+                        'function_id' => 1,
+                        'description' => 'deparment user',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],

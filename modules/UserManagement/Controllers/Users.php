@@ -1,11 +1,15 @@
-<?php 
+<?php
 namespace Modules\UserManagement\Controllers;
 
 use Modules\UserManagement\Models\UsersModel;
 use Modules\UserManagement\Models\RolesModel;
+use Modules\UserManagement\Models\UserDetailsModel;
+use Modules\SystemSettings\Models\AreasModel;
+use Modules\SystemSettings\Models\DepartmentsModel;
+use Modules\SystemSettings\Models\ProgramsModel;
 use App\Controllers\BaseController;
 
-class Users extends BaseController 
+class Users extends BaseController
 {
 	private $roles;
 
@@ -14,21 +18,64 @@ class Users extends BaseController
 		parent:: __construct();
 
 		$role_model = new RolesModel();
-		$this->roles = $role_model->getRoleWithCondition(['status' => 'a']);		
+		$this->roles = $role_model->getRoleWithCondition(['status' => 'a']);
 	}
 
 	public function show_user($id)
 	{
+		//die("here");
 		$this->hasPermissionRedirect('show-user');
 		$data['permissions'] = $this->permissions;
 
 		$model = new UsersModel();
+		$model_areas = new AreasModel();
+		$model_departments = new DepartmentsModel();
+		$model_user_details = new UserDetailsModel();
+		$model_ac_details = new ProgramsModel();
+
+		$data['areas'] = $model_areas->where('status', 'a')->findAll();
+		$data['academic_programs'] = $model_ac_details->where('status', 'a')->findAll();
+		$data['departments'] = $model_departments->where('status', 'a')->findAll();
 
 		$data['user'] = $model->getUserWithCondition(['id' => $id]);
+		$data['user_detail'] = $model_user_details->getCredential($id);
+
+		// print_r($data['user_detail']); die("here");
 
 		$data['function_title'] = "User Profile";
         $data['viewName'] = 'Modules\UserManagement\Views\users\userProfile';
         echo view('App\Views\theme\index', $data);
+	}
+
+	public function add_credentials()
+	{
+			$data = array(
+						 'user_id'  => $_POST['user_id'],
+						 'area_id'  => $_POST['area_id'],
+						 'department_id' => $_POST['department_id'],
+						 'academic_program_id' => $_POST['academic_program_id'],
+						 'created_at' => (new \DateTime())->format('Y-m-d H:i:s')
+				 );
+
+			$model_user_details = new UserDetailsModel();
+			$jdata = $model_user_details->addUserDetail($data);
+			echo json_encode($jdata);
+	}
+
+	public function edit_credentials($id)
+	{
+			$data = array(
+						 'user_id'  => $_POST['user_id'],
+						 'area_id'  => $_POST['area_id'],
+						 'department_id' => $_POST['department_id'],
+						 'academic_program_id' => $_POST['academic_program_id'],
+						 'created_at' => (new \DateTime())->format('Y-m-d H:i:s')
+				 );
+
+			// return json_encode($id);
+			$model_user_details = new UserDetailsModel();
+			$jdata = $model_user_details->editUserDetail($data, $id);
+			echo json_encode($jdata);
 	}
 
 	public function user_own_profile($id)
@@ -52,11 +99,11 @@ class Users extends BaseController
 	}
 
     public function index($offset = 0)
-    {	
+    {
     	$this->hasPermissionRedirect('list-user');
 
     	$model = new UsersModel();
- 
+
     	//kailangan ito para sa pagination
        	$data['all_items'] = $model->getUserWithCondition(['status'=> 'a']);
        	$data['offset'] = $offset;
@@ -71,9 +118,9 @@ class Users extends BaseController
     public function add_user()
     {
     	$this->hasPermissionRedirect('add-user');
-    	
+
     	$data['roles'] = $this->roles;
-		
+
     	helper(['form', 'url']);
     	$model = new UsersModel();
     	if(!empty($_POST))
@@ -100,7 +147,7 @@ class Users extends BaseController
 					$this->session->markAsFlashdata('error');
 		        	return redirect()->to( base_url('users'));
 		        }
-		    }    		
+		    }
     	}
     	else
     	{
@@ -118,7 +165,7 @@ class Users extends BaseController
     	$data['roles'] = $this->roles;
 
     	helper(['form', 'url', 'html']);
-    	
+
     	$model = new UsersModel();
     	$data['rec'] = $model->find($id);
 
@@ -147,7 +194,7 @@ class Users extends BaseController
 					$this->session->markAsFlashdata('error');
 		        	return redirect()->to( base_url('users'));
 		        }
-		    }    		
+		    }
     	}
     	else
     	{
@@ -160,7 +207,7 @@ class Users extends BaseController
     public function delete_user($id)
     {
     	$this->hasPermissionRedirect('delete-user');
-    	
+
     	$model = new UsersModel();
     	$model->deleteUser($id);
     }

@@ -19,7 +19,7 @@ class PermissionSeeder extends \CodeIgniter\Database\Seeder
                         'table_name' => 'users',
                         'func_action' => 'link',
                         'func_type' => 1,
-                        'allowed_roles' => '[1,2]',
+                        'allowed_roles' => '[1,2,3,4,5]',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
