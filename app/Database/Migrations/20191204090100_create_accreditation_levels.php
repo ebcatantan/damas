@@ -1,7 +1,7 @@
 <?php namespace App\Database\Migrations;
 
 class CreateAccreditationLevels extends \CodeIgniter\Database\Migration {
-
+        private $table = 'accreditation_levels';
         public function up()
         {
                 $this->forge->addField([
@@ -27,7 +27,7 @@ class CreateAccreditationLevels extends \CodeIgniter\Database\Migration {
                                 'constraint'     => '1',
                                 'default'        => 'a'
                         ],
-                        
+
                         'created_at' => [
                                 'type'           => 'DATETIME',
                                 'comment'        => 'Date of creation',
@@ -47,11 +47,54 @@ class CreateAccreditationLevels extends \CodeIgniter\Database\Migration {
                         ]
                 ]);
                 $this->forge->addKey('id', TRUE);
-                $this->forge->createTable('accreditation_levels');
+                $this->forge->createTable($this->table);
+
+                $data = [
+                    [
+                        'accreditation_level' => 'preliminary visit',
+                        'description' => 'preliminary visit',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'accreditation_level' => 'level 1',
+                        'description' => 'level 1',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'accreditation_level' => 'level 2',
+                        'description' => 'level 2',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'accreditation_level' => 'level 3',
+                        'description' => 'level 3',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'accreditation_level' => 'level 4',
+                        'description' => 'level 4',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'accreditation_level' => 'level 5',
+                        'description' => 'level 5',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ]
+                ];
+
+                $db      = \Config\Database::connect();
+                $builder = $db->table($this->table);
+                $builder->insertBatch($data);
         }
 
         public function down()
         {
-                $this->forge->dropTable('accreditation_levels');
+                $this->forge->dropTable($this->table);
         }
 }

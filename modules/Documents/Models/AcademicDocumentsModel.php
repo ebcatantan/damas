@@ -23,11 +23,11 @@ class AcademicDocumentsModel extends \CodeIgniter\Model
 	{
 		$db = \Config\Database::connect();
 
-		$str  = "SELECT a.*, b.document_type_code, b.document_type_name, c.area_code, c.area_name, d.department_name, e.program_name, f.lastname, f.firstname FROM academic_documents a ";
+		$str  = "SELECT a.*, b.document_type_code, b.document_type_name, f.lastname, f.firstname FROM academic_documents a ";
     $str .= "LEFT JOIN document_types b ON a.document_type_id = b.id ";
-    $str .= "LEFT JOIN areas c ON a.area_id = c.id ";
-    $str .= "LEFT JOIN departments d ON a.department_id = d.id ";
-    $str .= "LEFT JOIN academic_programs e ON a.academic_program_id = e.id ";
+    // $str .= "LEFT JOIN areas c ON a.area_id = c.id ";
+    // $str .= "LEFT JOIN departments d ON a.department_id = d.id ";
+    // $str .= "LEFT JOIN academic_programs e ON a.academic_program_id = e.id ";
     $str .= "LEFT JOIN users f ON a.uploader_id = f.id ";
     $str .=" WHERE a.status = '".$args['status']."' LIMIT ". $args['offset'] .','.$args['limit'];
 

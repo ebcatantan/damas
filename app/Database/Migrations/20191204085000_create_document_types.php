@@ -2,6 +2,8 @@
 
 class CreateDocumentTypes extends \CodeIgniter\Database\Migration {
 
+        private $table = 'document_types';
+
         public function up()
         {
                 $this->forge->addField([
@@ -52,11 +54,31 @@ class CreateDocumentTypes extends \CodeIgniter\Database\Migration {
                         ]
                 ]);
                 $this->forge->addKey('id', TRUE);
-                $this->forge->createTable('document_types');
+                $this->forge->createTable($this->table);
+
+                $data = [
+                    [
+                        'document_type_code' => 'memo',
+                        'document_type_name' => 'memo',
+                        'description' => 'memo',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'document_type_code' => 'tm',
+                        'document_type_name' => 'teaching materials',
+                        'description' => 'teaching materials',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                ];
+                $db      = \Config\Database::connect();
+                $builder = $db->table($this->table);
+                $builder->insertBatch($data);
         }
 
         public function down()
         {
-                $this->forge->dropTable('document_types');
+                $this->forge->dropTable($this->table);
         }
 }

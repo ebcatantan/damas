@@ -1,7 +1,7 @@
 <?php namespace App\Database\Migrations;
 
 class CreateAreas extends \CodeIgniter\Database\Migration {
-
+        private $table = 'areas';
         public function up()
         {
                 $this->forge->addField([
@@ -56,12 +56,43 @@ class CreateAreas extends \CodeIgniter\Database\Migration {
                                 'comment'        => 'Date of soft deletion',
                         ]
                 ]);
+                
                 $this->forge->addKey('id', TRUE);
-                $this->forge->createTable('areas');
+                $this->forge->createTable($this->table);
+
+                $data = [
+                    [
+                        'area_code' => 'area 1',
+                        'area_name' => 'research',
+                        'description' => 'research area',
+                        'area_head_id' => 1,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'area_code' => 'area 2',
+                      'area_name' => 'curriculum and instruction',
+                      'description' => 'curriculum and instruction',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'area_code' => 'area 3',
+                      'area_name' => 'extension programs',
+                      'description' => 'extension programs',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                ];
+                $db      = \Config\Database::connect();
+                $builder = $db->table($this->table);
+                $builder->insertBatch($data);
         }
 
         public function down()
         {
-                $this->forge->dropTable('areas');
+                $this->forge->dropTable($this->table);
         }
 }

@@ -38,13 +38,13 @@ class AcademicDocuments extends BaseController
     {
 			// print_r($_SESSION['user_details']); die();
     	$this->hasPermissionRedirect('list-academic-document');
-
     	$model = new AcademicDocumentsModel();
 
      	$data['all_items'] = $model->getAcademicDocumentWithCondition(['status'=> 'a']);
      	$data['offset'] = $offset;
 
       $data['academic_documents'] = $model->getAcademicDocumentWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
+			// die("here");
 
 			// print_r($data['academic_documents']); die();
 
@@ -69,23 +69,23 @@ class AcademicDocuments extends BaseController
     echo view('App\Views\theme\index', $data);
 	}
 
-    public function upload_academic_program_file()
+    public function upload_academic_document()
     {
-    	$this->hasPermissionRedirect('upload-academic-program-file');
+    	$this->hasPermissionRedirect('upload-academic-document');
     	$permissions_model = new PermissionsModel();
     	$data['permissions'] = $this->permissions;
 
 			$model_document_types = new DocumentTypesModel();
 			$data['document_types'] = $model_document_types->where('status', 'a')->findAll();
 
-			$model_departments = new DepartmentsModel();
-			$data['departments'] = $model_departments->where('status', 'a')->findAll();
-
-			$model_area = new AreasModel();
-			$data['areas'] = $model_area->where('status', 'a')->findAll();
-
-			$model_programs = new ProgramsModel();
-			$data['academic_programs'] = $model_programs->where('status', 'a')->findAll();
+			// $model_departments = new DepartmentsModel();
+			// $data['departments'] = $model_departments->where('status', 'a')->findAll();
+			//
+			// $model_area = new AreasModel();
+			// $data['areas'] = $model_area->where('status', 'a')->findAll();
+			//
+			// $model_programs = new ProgramsModel();
+			// $data['academic_programs'] = $model_programs->where('status', 'a')->findAll();
 
 			// die("here");
     	helper(['form', 'url']);

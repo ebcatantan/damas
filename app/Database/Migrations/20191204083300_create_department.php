@@ -1,7 +1,7 @@
 <?php namespace App\Database\Migrations;
 
 class CreateDepartments extends \CodeIgniter\Database\Migration {
-
+        private $table = 'departments';
         public function up()
         {
                 $this->forge->addField([
@@ -51,12 +51,67 @@ class CreateDepartments extends \CodeIgniter\Database\Migration {
                                 'comment'        => 'Date of soft deletion',
                         ]
                 ]);
+                
                 $this->forge->addKey('id', TRUE);
-                $this->forge->createTable('departments');
+                $this->forge->createTable($this->table);
+                $data = [
+                    [
+                        'department_name' => 'Student Services',
+                        'description' => 'Student Services',
+                        'dept_head_id' => 1,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'department_name' => 'Academic Programs',
+                        'description' => 'Academic Programs',
+                        'dept_head_id' => 1,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'department_name' => 'Medical',
+                        'description' => 'Medical',
+                        'dept_head_id' => 1,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'department_name' => 'Dental',
+                        'description' => 'Dental',
+                        'dept_head_id' => 1,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'department_name' => 'Information Technology',
+                        'description' => 'Information Technology',
+                        'dept_head_id' => 1,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'department_name' => 'Library',
+                        'description' => 'Library',
+                        'dept_head_id' => 1,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'department_name' => 'Administration',
+                        'description' => 'Administration',
+                        'dept_head_id' => 1,
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                ];
+                $db      = \Config\Database::connect();
+                $builder = $db->table($this->table);
+                $builder->insertBatch($data);
         }
 
         public function down()
         {
-                $this->forge->dropTable('departments');
+                $this->forge->dropTable($this->table);
         }
 }

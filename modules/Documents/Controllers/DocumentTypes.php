@@ -53,12 +53,9 @@ class DocumentTypes extends BaseController
     	$this->hasPermissionRedirect('add-document-type');
     	$permissions_model = new PermissionsModel();
     	$data['permissions'] = $this->permissions;
-			// $user_model = new UsersModel();
-			// $data['users'] = $user_model->findAll();
 
     	helper(['form', 'url']);
     	$model = new DocumentTypesModel();
-			// die("here");
 
     	if(!empty($_POST))
     	{
@@ -73,6 +70,7 @@ class DocumentTypes extends BaseController
 		    {
 		        if($model->addDocumentType($_POST))
 		        {
+							mkdir(ROOTPATH."uploads/".strtoupper($_POST['document_type_code']), 0755);
 		        	$_SESSION['success'] = 'You have added a new record';
 							$this->session->markAsFlashdata('success');
 		        	return redirect()->to(base_url('document-types'));
@@ -107,7 +105,8 @@ class DocumentTypes extends BaseController
     	{
 	    	if (!$this->validate('document_type'))
 		    {
-		    	$data['errors'] = \Config\Services::validation()->getErrors();
+
+		    		$data['errors'] = \Config\Services::validation()->getErrors();
 		        $data['function_title'] = "Modify Document Type";
 		        $data['viewName'] = 'Modules\Documents\Views\document_type\frmDocumentType';
 		        echo view('App\Views\theme\index', $data);
@@ -116,6 +115,10 @@ class DocumentTypes extends BaseController
 		    {
 		    	if($model->editDocumentType($_POST, $id))
 		        {
+							if (!is_dir(ROOTPATH."uploads/".strtoupper($_POST['document_type_code']))) {
+								rename(ROOTPATH."uploads/".strtoupper($data['rec']['document_type_code']), ROOTPATH."uploads/".strtoupper($_POST['document_type_code']));
+							}
+
 		        	$_SESSION['success'] = 'You have updated a record';
 							$this->session->markAsFlashdata('success');
 		        	return redirect()->to(base_url('document-types'));

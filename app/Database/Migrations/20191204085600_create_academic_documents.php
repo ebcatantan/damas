@@ -17,9 +17,14 @@ class CreateAcademicDocuments extends \CodeIgniter\Database\Migration {
                                 'constraint'     => '255',
                         ],
 
-                        'doc_path'       => [
+                        'doc_attachment'       => [
                                 'type'           => 'text',
                                 'constraint'     => '255',
+                        ],
+
+                        'doctype_ext'       => [
+                                'type'           => 'VARCHAR',
+                                'constraint'     => '10',
                         ],
 
                         'description' => [
@@ -29,20 +34,6 @@ class CreateAcademicDocuments extends \CodeIgniter\Database\Migration {
 
                         'document_type_id'       => [
                                 'type'           => 'BIGINT',
-                        ],
-
-                        'area_id'       => [
-                                'type'           => 'BIGINT',
-                        ],
-
-                        'department_id'       => [
-                                'type'           => 'BIGINT',
-                                'null'           => TRUE
-                        ],
-
-                        'academic_program_id'       => [
-                                'type'           => 'BIGINT',
-                                'null'           => TRUE
                         ],
 
                         'uploader_id'       => [

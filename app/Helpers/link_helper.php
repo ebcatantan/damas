@@ -19,6 +19,7 @@ if (! function_exists('user_primary_links'))
 {
 	function user_primary_links(array $array_permissions)
 	{
+		$strAdditionalUrl = '';
 		foreach($_SESSION['appmodules'] as $module)
 		{
 			if(hasPrimary($module['id'], $array_permissions))
@@ -39,7 +40,13 @@ if (! function_exists('user_primary_links'))
 						}
 						else
 						{
-							echo '<a class="dropdown-item" title="'.ucwords($permission['function_name']) .'" data-toggle="tooltip" data-placement="bottom" class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).'">'.getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .' </a>';
+							if('upload-academic-document' == $permission['slugs'])
+							{
+								$strAdditionalUrl = '/upload-academic-document';
+							}
+
+							echo '<a class="dropdown-item" title="'.ucwords($permission['function_name']) .'" data-toggle="tooltip" data-placement="bottom" class="nav-link" href="'. base_url() .''.str_replace("_","-",$permission['table_name']).''.$strAdditionalUrl.'">'.getIcon($permission['id'], $_SESSION['userPermmissions']).' '.ucwords($permission['function_name']) .' </a>';
+							$strAdditionalUrl = '';
 						}
 					}
 				}
@@ -69,7 +76,7 @@ if (! function_exists('user_add_link'))
 
 if (! function_exists('file_upload_link'))
 {
-	function file_upload_link($slugs, array $array_permissions, $name, $class)
+	function file_upload_link($slugs, array $array_permissions, $name, $class, $hasStyle = 1)
 	{
 		foreach($array_permissions as $permission)
 		{
@@ -77,7 +84,12 @@ if (! function_exists('file_upload_link'))
 			{
 				echo '<div class="col-md">';
 					echo '<a id = "'.$name.'" name="'.$name.'" href="'.base_url('academic-documents/'.$slugs) .'" class="'.$class.'">';
-		 	       echo '<i style="font-size: 3em" class="fas fa-file-upload"></i> <br>'.$permission['function_name'];
+					if($hasStyle == 1){
+						echo '<i style="font-size: 3em" class="fas fa-file-upload"></i> <br>'.$permission['function_name'];
+					}
+					else {
+						echo '<i style="font-size: 1.3em" class="fas fa-file-upload"></i> '.$permission['function_name'];
+					}
 		 	    echo '</a>';
 				echo '</div>';
 				break;

@@ -113,7 +113,7 @@ class Validation
     public $document_type = [
         'document_type_code' => [
             'label'  => 'Document Type Code',
-            'rules'  => 'required',
+            'rules'  => 'required|alpha_numeric',
             'errors' => [
                 'required' => 'Document Type Code field is required.'
             ]
@@ -168,7 +168,7 @@ class Validation
             'rules'  => 'required|alpha_space',
             'errors' => [
                 'required' => 'Lastname field is required.',
-                'alpha' => 'Lastname must not have numbers.'
+                'alpha_space' => 'Lastname must not have numbers.'
             ]
         ],
         'firstname' => [
@@ -176,7 +176,7 @@ class Validation
             'rules'  => 'required|alpha_space',
             'errors' => [
                 'required' => 'Firstname field is required.',
-                'alpha' => 'Lastname must not have numbers.'
+                'alpha_space' => 'Lastname must not have numbers.'
             ]
         ],
         'username' => [

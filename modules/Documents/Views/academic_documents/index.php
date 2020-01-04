@@ -1,4 +1,4 @@
- <div class="row">
+ <!-- <div class="row">
    <div class="col-md-3"></div>
    <div class="col-md-6">
      <div class="row">
@@ -8,9 +8,9 @@
      </div>
    </div>
  </div>
- <br>
+ <br> -->
  <div class="row">
-   <div class="col-md-6 offset-3">
+   <div class="col-md-6 offset-1">
      <div class="input-group">
       <input type="text" name="search_item" class="form-control" placeholder="Search for documents">
       <div class="input-group-append">
@@ -19,6 +19,9 @@
         </button>
       </div>
     </div>
+   </div>
+   <div class="col-md-4">
+     <?php file_upload_link('upload-academic-document', $_SESSION['userPermmissions'], 'academic_document_upload', 'btn btn-info btn-block', 0) ?>
    </div>
  </div>
 <br>
