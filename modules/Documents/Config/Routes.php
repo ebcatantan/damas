@@ -1,4 +1,4 @@
-<?php
+  <?php
 $routes->group('document-types', ['namespace' => 'Modules\Documents\Controllers'], function($routes)
 {
     $routes->get('/', 'DocumentTypes::index');

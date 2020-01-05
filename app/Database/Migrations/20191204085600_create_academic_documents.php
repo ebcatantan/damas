@@ -22,11 +22,6 @@ class CreateAcademicDocuments extends \CodeIgniter\Database\Migration {
                                 'constraint'     => '255',
                         ],
 
-                        'doctype_ext'       => [
-                                'type'           => 'VARCHAR',
-                                'constraint'     => '10',
-                        ],
-
                         'description' => [
                                 'type'           => 'TEXT',
                                 'null'           => TRUE,

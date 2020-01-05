@@ -19,7 +19,7 @@
 <br>
 <div class="row">
   <div class="col-md-12">
-    <form action="<?= base_url() ?>academic-documents/<?= isset($rec) ? 'edit-uploadede-file/'.$rec['id'] : 'upload-academic-program-file' ?>" method="post" enctype="multipart/form-data">
+    <form action="<?= base_url() ?>academic-documents/<?= isset($rec) ? 'edit/'.$rec['id'] : 'upload-academic-document' ?>" method="post" enctype="multipart/form-data">
       <!-- <fieldset <?= $_SESSION['user_details']['academic_program_id'] == 0 ? 'disabled="disabled"': ''?>> -->
       <div class="row">
         <div class="col-md-6 offset-md-3">
@@ -37,8 +37,8 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="form-group">
-            <label for="doc_attachment">Attachment</label>
-            <input style="padding-bottom: 10px" class="form-control" name="doc_attachment" type="file" value="<?= isset($rec['doc_attachment']) ? $rec['doc_attachment'] : set_value('doc_attachment') ?>" class="<?= $errors['doc_attachment'] ? 'is-invalid':'is-valid' ?>" id="doc_attachment" placeholder="File Attachment">
+            <label for="doc_attachment">File Attachment</label>
+            <input name="doc_attachment" type="file" value="<?= isset($rec['doc_attachment']) ? $rec['doc_attachment'] : set_value('doc_attachment') ?>" class="form-control <?= $errors['doc_attachment'] ? 'is-invalid':'is-valid' ?>" id="doc_attachment" placeholder="File Attachment">
               <?php if($errors['doc_attachment']): ?>
                 <div class="invalid-feedback">
                   <?= $errors['doc_attachment'] ?>
@@ -53,7 +53,7 @@
             <label for="document_type_id">Document Type</label>
             <select name="document_type_id" class="form-control <?= $errors['document_type_id'] ? 'is-invalid':'is-valid' ?>">
               <?php if(isset($rec['document_type_id'])): ?>
-                <option value="<?= $rec['document_type_id'] ?>"><?= name_on_system($rec['document_type_id'], $document_types, 'document_types') ?></option>
+                <option value="<?= $rec['document_type_id'] ?>"><?= strtoupper(name_on_system($rec['document_type_id'], $document_types, 'document_types')) ?></option>
               <?php else: ?>
                 <option value="">Select Document Type of the File</option>
               <?php endif; ?>

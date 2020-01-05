@@ -1,14 +1,3 @@
- <!-- <div class="row">
-   <div class="col-md-3"></div>
-   <div class="col-md-6">
-     <div class="row">
-       <?php file_upload_link('upload-academic-program-file', $_SESSION['userPermmissions'], 'academic_program_file_upload', 'btn btn-outline-secondary btn-block') ?>
-       <?php file_upload_link('upload-area-file', $_SESSION['userPermmissions'], 'area_file_upload', 'btn btn-outline-success btn-block') ?>
-       <?php file_upload_link('upload-department-file', $_SESSION['userPermmissions'], 'department_file_upload', 'btn btn-outline-info btn-block') ?>
-     </div>
-   </div>
- </div>
- <br> -->
  <div class="row">
    <div class="col-md-6 offset-1">
      <div class="input-group">
@@ -43,7 +32,7 @@
           <tr id="<?php echo $academic_document['id']; ?>">
             <th scope="row"><?= $cnt++ ?></th>
             <td>
-              <a href="<?= $academic_document['doc_path'] ?>" target="_blank"><i class="far fa-file-alt"></i> VIEW DOCUMENT</a>
+              <a href="<?= base_url().'uploads/'.strtoupper($academic_document['document_type_code']).'/'.$academic_document['doc_attachment'] ?>" target="_blank"><i class="far fa-file-alt"></i> VIEW DOCUMENT</a>
               <?php echo strtoupper($academic_document['doc_name']) ?>
             </td>
             <td><?= ucwords($academic_document['description']) ?></td>

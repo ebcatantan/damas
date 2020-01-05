@@ -37,6 +37,9 @@ class AcademicDocuments extends BaseController
     public function index($offset = 0)
     {
 			// print_r($_SESSION['user_details']); die();
+			$model_document_types = new DocumentTypesModel();
+			$data['document_types'] = $model_document_types->where('status', 'a')->findAll();
+
     	$this->hasPermissionRedirect('list-academic-document');
     	$model = new AcademicDocumentsModel();
 
@@ -62,6 +65,7 @@ class AcademicDocuments extends BaseController
 		// $data['users'] = $user_model->findAll();
 
 		$model = new AcademicDocumentsModel();
+		// die("here");
 
 		$data['document'] = $model->getAcademicDocuemntById($id);
 		$data['function_title'] = "Academic Document Details";
@@ -78,97 +82,167 @@ class AcademicDocuments extends BaseController
 			$model_document_types = new DocumentTypesModel();
 			$data['document_types'] = $model_document_types->where('status', 'a')->findAll();
 
-			// $model_departments = new DepartmentsModel();
-			// $data['departments'] = $model_departments->where('status', 'a')->findAll();
-			//
-			// $model_area = new AreasModel();
-			// $data['areas'] = $model_area->where('status', 'a')->findAll();
-			//
-			// $model_programs = new ProgramsModel();
-			// $data['academic_programs'] = $model_programs->where('status', 'a')->findAll();
-
-			// die("here");
     	helper(['form', 'url']);
     	$model = new AcademicDocumentsModel();
 
     	if(!empty($_POST))
     	{
-				print_r($_FILES);
-				print_r($_POST); die();
-	    	if (!$this->validate('document_type'))
+
+				$validated = $this->validate([
+            'doc_attachment' => [
+                'rules' => 'uploaded[doc_attachment]|ext_in[doc_attachment,doc,docx,ppt,pptx,odp,odt,pdf,pps]',
+								'label' => 'Document Attachment'
+            ],
+						'doc_name' => ['label' => 'Document Name', 'rules' => 'required'],
+    				'document_type_id' => ['label' => 'Document Type', 'rules' => 'required']
+        ]);
+
+	    	if (!$validated)
 		    {
-		    	$data['errors'] = \Config\Services::validation()->getErrors();
-		        $data['function_title'] = "Adding Document Type";
-		        $data['viewName'] = 'Modules\Dcuments\Views\document_type\frmDocumentType';
-		        echo view('App\Views\theme\index', $data);
+		    	  $data['errors'] = \Config\Services::validation()->getErrors();
+		        $data['function_title'] = "Upload Academic Program Document";
+						$data['viewName'] = 'Modules\Documents\Views\academic_documents\frmDocumentUpload';
+  	        echo view('App\Views\theme\index', $data);
 		    }
 		    else
 		    {
-		        if($model->addDocumentType($_POST))
+						$file_array = [
+							'doc_attachment' => $_FILES['doc_attachment']['name'],
+							'doc_name' => $_POST['doc_name'],
+							'description' => $_POST['description'],
+							'uploader_id' => $_SESSION['uid'],
+							'document_type_id' => $_POST['document_type_id']
+							];
+
+		        if($model->addAcademicDocument($file_array))
 		        {
-		        	$_SESSION['success'] = 'You have added a new record';
+							$doc_type = $model_document_types->where('status', 'a')->find($_POST['document_type_id']);
+
+							$file = $this->request->getFile('doc_attachment');
+            	$file->move(ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']));
+
+		        	$_SESSION['success'] = 'You have uploaded a new academic document';
 							$this->session->markAsFlashdata('success');
-		        	return redirect()->to(base_url('document-types'));
+		        	return redirect()->to(base_url('academic-documents'));
 		        }
 		        else
 		        {
-		        	$_SESSION['error'] = 'You have an error in adding a new record';
+		        	$_SESSION['error'] = 'You have an error in uploading a new academic document';
 							$this->session->markAsFlashdata('error');
-		        	return redirect()->to(base_url('document-types'));
+		        	return redirect()->to(base_url('academic-documents'));
 		        }
 		    }
     	}
     	else
     	{
-					// die("here");
 	    	  $data['function_title'] = "Upload Academic Program Document";
 	        $data['viewName'] = 'Modules\Documents\Views\academic_documents\frmDocumentUpload';
 	        echo view('App\Views\theme\index', $data);
     	}
     }
 
-    // public function edit_document_type($id)
-    // {
-    // 	$this->hasPermissionRedirect('edit-document-type');
-    // 	helper(['form', 'url']);
-    // 	$model = new DocumentTypesModel();
-    // 	$data['rec'] = $model->find($id);
-		//
-    // 	$data['permissions'] = $this->permissions;
-		//
-    // 	if(!empty($_POST))
-    // 	{
-	  //   	if (!$this->validate('document_type'))
-		//     {
-		//     	$data['errors'] = \Config\Services::validation()->getErrors();
-		//         $data['function_title'] = "Modify Document Type";
-		//         $data['viewName'] = 'Modules\Documents\Views\document_type\frmDocumentType';
-		//         echo view('App\Views\theme\index', $data);
-		//     }
-		//     else
-		//     {
-		//     	if($model->editDocumentType($_POST, $id))
-		//         {
-		//         	$_SESSION['success'] = 'You have updated a record';
-		// 					$this->session->markAsFlashdata('success');
-		//         	return redirect()->to(base_url('document-types'));
-		//         }
-		//         else
-		//         {
-		//         	$_SESSION['error'] = 'You an errot in updating a record';
-		// 			$this->session->markAsFlashdata('error');
-		//         	return redirect()->to( base_url('document-types'));
-		//         }
-		//     }
-    // 	}
-    // 	else
-    // 	{
-	  //   	$data['function_title'] = "Modify Area";
-	  //       $data['viewName'] = 'Modules\Documents\Views\document_types\frmDocumentType';
-	  //       echo view('App\Views\theme\index', $data);
-    // 	}
-    // }
-		//
+    public function edit_academic_document($id)
+    {
+    	$this->hasPermissionRedirect('edit-academic-document');
+    	helper(['form', 'url']);
+    	$model = new AcademicDocumentsModel();
+    	$valResult = $model->getAcademicDocuemntById($id);
+			$data['rec'] = $valResult[0];
+    	$data['permissions'] = $this->permissions;
+
+			$model_document_types = new DocumentTypesModel();
+			$data['document_types'] = $model_document_types->where('status', 'a')->findAll();
+
+    	if(!empty($_POST))
+    	{
+				$arrFile = [];
+				if(!empty($_FILES['doc_attachment']['name']))
+				{
+					$arrFile = [
+							'rules' => 'ext_in[doc_attachment,doc,docx,ppt,pptx,odp,odt,pdf,pps]',
+							'label' => 'Document Attachment'
+					];
+				}
+				// print_r($arrFile)."<br>";
+				// print_r($_FILES); die();
+				$validated = $this->validate([
+						'doc_attachment' => $arrFile,
+						'doc_name' => ['label' => 'Document Name', 'rules' => 'required'],
+						'document_type_id' => ['label' => 'Document Type', 'rules' => 'required']
+				]);
+
+				if (!$validated)
+				{
+						$data['errors'] = \Config\Services::validation()->getErrors();
+						$data['function_title'] = "Modify Academic Document";
+		        $data['viewName'] = 'Modules\Documents\Views\academic_documents\frmDocumentUpload';
+		        echo view('App\Views\theme\index', $data);
+				}
+				else
+				{
+						if(!empty($_FILES['doc_attachment']['name']))
+						{
+							$file_array = [
+								'doc_attachment' => $_FILES['doc_attachment']['name'],
+								'doc_name' => $_POST['doc_name'],
+								'description' => $_POST['description'],
+								'uploader_id' => $_SESSION['uid'],
+								'document_type_id' => $_POST['document_type_id']
+								];
+						}
+						else {
+							$file_array = [
+								'doc_name' => $_POST['doc_name'],
+								'description' => $_POST['description'],
+								'uploader_id' => $_SESSION['uid'],
+								'document_type_id' => $_POST['document_type_id']
+								];
+						}
+
+						$doc_type = $model_document_types->where('status', 'a')->find($_POST['document_type_id']);
+						$origFile = ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']).'/'.$data['rec']['doc_attachment'];
+						// echo $origFile; die("here");
+						if(!empty($_FILES['doc_attachment']['name']))
+						{
+							$newFile = ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']).'/'.$_FILES['doc_attachment']['name'];
+
+							if (!file_exists($newFile) && $origFile != $newFile) {
+									$file = $this->request->getFile('doc_attachment');
+									$file->move(ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']));
+									unlink($origFile);
+									// die("here");
+							}
+
+							if (!file_exists($newFile) && $origFile == $newFile) {
+									unlink($origFile);
+									$file = $this->request->getFile('doc_attachment');
+									$file->move(ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']));
+							}
+						}
+
+						if($model->editAcademicDocument($file_array, $id))
+						{
+							$_SESSION['success'] = 'You have uploaded a new academic document';
+							$this->session->markAsFlashdata('success');
+							return redirect()->to(base_url('academic-documents'));
+						}
+						else
+						{
+							$_SESSION['error'] = 'You have an error in uploading a new academic document';
+							$this->session->markAsFlashdata('error');
+							return redirect()->to(base_url('academic-documents'));
+						}
+				}
+    	}
+    	else
+    	{
+	    		$data['function_title'] = "Modify Academic Document";
+					// print_r($data['rec']); die("here");
+	        $data['viewName'] = 'Modules\Documents\Views\academic_documents\frmDocumentUpload';
+	        echo view('App\Views\theme\index', $data);
+    	}
+    }
+
     // public function delete_document_type($id)
     // {
     // 	$this->hasPermissionRedirect('delete-document-type');

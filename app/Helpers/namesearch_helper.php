@@ -37,6 +37,9 @@ if (! function_exists('name_on_system'))
 						case 'academic_programs':
 							$str = $list['program_name'];
 							break;
+						case 'document_types':
+							$str = $list['document_type_code'].' - '.$list['document_type_name'];
+							break;
 						default:
 							break;
 					}
