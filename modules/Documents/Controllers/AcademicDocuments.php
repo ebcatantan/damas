@@ -5,9 +5,6 @@ use Modules\Documents\Models\AcademicDocumentsModel;
 use Modules\UserManagement\Models\PermissionsModel;
 use Modules\UserManagement\Models\UserDetailsModel;
 use Modules\Documents\Models\DocumentTypesModel;
-use Modules\SystemSettings\Models\AreasModel;
-use Modules\SystemSettings\Models\DepartmentsModel;
-use Modules\SystemSettings\Models\ProgramsModel;
 use App\Controllers\BaseController;
 
 class AcademicDocuments extends BaseController
@@ -199,29 +196,29 @@ class AcademicDocuments extends BaseController
 								];
 						}
 
-						$doc_type = $model_document_types->where('status', 'a')->find($_POST['document_type_id']);
-						$origFile = ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']).'/'.$data['rec']['doc_attachment'];
-						// echo $origFile; die("here");
-						if(!empty($_FILES['doc_attachment']['name']))
-						{
-							$newFile = ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']).'/'.$_FILES['doc_attachment']['name'];
-
-							if (!file_exists($newFile) && $origFile != $newFile) {
-									$file = $this->request->getFile('doc_attachment');
-									$file->move(ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']));
-									unlink($origFile);
-									// die("here");
-							}
-
-							if (!file_exists($newFile) && $origFile == $newFile) {
-									unlink($origFile);
-									$file = $this->request->getFile('doc_attachment');
-									$file->move(ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']));
-							}
-						}
 
 						if($model->editAcademicDocument($file_array, $id))
 						{
+							$doc_type = $model_document_types->where('status', 'a')->find($_POST['document_type_id']);
+							$origFile = ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']).'/'.$data['rec']['doc_attachment'];
+							// echo $origFile; die("here");
+							if(!empty($_FILES['doc_attachment']['name']))
+							{
+								$newFile = ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']).'/'.$_FILES['doc_attachment']['name'];
+
+								if (!file_exists($newFile) && $origFile != $newFile) {
+									$file = $this->request->getFile('doc_attachment');
+									$file->move(ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']));
+									unlink($origFile);
+								}
+
+								if (!file_exists($newFile) && $origFile == $newFile) {
+									unlink($origFile);
+									$file = $this->request->getFile('doc_attachment');
+									$file->move(ROOTPATH."uploads/".strtoupper($doc_type['document_type_code']));
+								}
+							}
+
 							$_SESSION['success'] = 'You have uploaded a new academic document';
 							$this->session->markAsFlashdata('success');
 							return redirect()->to(base_url('academic-documents'));

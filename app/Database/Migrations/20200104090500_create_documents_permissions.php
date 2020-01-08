@@ -80,7 +80,7 @@ class CreateDocumentsPermissions extends \CodeIgniter\Database\Migration {
                   'function_description' => 'delete document type',
                   'slugs' => 'delete-document-type',
                   'name_on_class' => 'delete_document_type',
-                  'page_title' => 'edit document type',
+                  'page_title' => 'delete document type',
                   'module_id' => '3',
                   'order' => '104',
                   'allowed_roles' => '[1]',

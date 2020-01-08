@@ -3,10 +3,6 @@ if (! function_exists('name_on_system'))
 {
 	function name_on_system($id = 0, $lists = [], $table = '')
 	{
-		// echo $id;
-		// echo "<br>";
-		//print_r($lists);
-		//print_r($table);
 		$str = "";
 		if(!empty($lists))
 		{
@@ -40,6 +36,9 @@ if (! function_exists('name_on_system'))
 						case 'document_types':
 							$str = $list['document_type_code'].' - '.$list['document_type_name'];
 							break;
+						case 'accreditation_levels':
+							$str = $list['accreditation_level'];
+							break;
 						default:
 							break;
 					}
@@ -47,8 +46,6 @@ if (! function_exists('name_on_system'))
 				}
 			}
 		}
-		// die($str);
-
 		return $str;
 	}
 }

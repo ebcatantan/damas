@@ -10,7 +10,7 @@ class Security extends BaseController
 		if($_POST)
 		{
 			$loginOK = 0;
-			$users = $model->getUserWithCondition(['username' => $_POST['username']]);
+			$users = $model->getUserWithCondition(['username' => $_POST['username'], 'status' => 'a']);
 
 			//checking of user existense
 			if(!empty($users))

@@ -30,23 +30,54 @@ class Validation
 		'single' => 'CodeIgniter\Validation\Views\single',
 	];
 
-	public $nodes = [
-        'title' => [
-            'label'  => 'Node Title',
+	public $accreditation_templates = [
+        'template_code' => [
+            'label'  => 'Template Code',
             'rules'  => 'required',
             'errors' => [
-                'required' => 'Node title field is required.'
+                'required' => 'Template Code field is required.'
             ]
         ],
 
-        'description' => [
-            'label'  => 'Node Description',
+        'template_name' => [
+            'label'  => 'Template Name',
             'rules'  => 'required',
             'errors' => [
-                'required' => 'Node desciption field is required.'
+                'required' => 'Template Name field is required.'
             ]
         ],
 
+				'description' => [
+					'label'  => 'Node Description',
+					'rules'  => 'required',
+					'errors' => [
+						'required' => 'Node desciption field is required.'
+					]
+				],
+
+        'accreditation_level_id' => [
+            'label'  => 'Acceditation Level',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Acceditation Level field is required.'
+            ]
+        ],
+
+        'academic_program_id' => [
+            'label'  => 'Academic Program',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Academic Program field is required.'
+            ]
+        ],
+
+        'area_id' => [
+            'label'  => 'Area',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Area field is required.'
+            ]
+        ],
     ];
 
     public $role = [

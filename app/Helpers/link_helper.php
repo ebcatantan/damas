@@ -32,7 +32,7 @@ if (! function_exists('user_primary_links'))
 				echo '<div class="dropdown-menu drop-items-primary" aria-labelledby="'.str_replace(' ', '', ucwords(name_on_system($module['id'], $_SESSION['appmodules'], 'modules'))).'">';
 				foreach($array_permissions as $permission)
 				{
-					if($permission['module_id'] == $module['id'] && $permission['func_type'] == 1 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
+					if($permission['status'] == 'a' && $permission['module_id'] == $module['id'] && $permission['func_type'] == 1 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
 					{
 						if($permission['slugs'] == 'user-own-profile')
 						{
@@ -66,7 +66,15 @@ if (! function_exists('user_add_link'))
 		{
 			if($permission['table_name'] == $table && $permission['func_type'] == 3 && in_array($_SESSION['rid'], json_decode($permission['allowed_roles'])))
 			{
-				echo  '<a href="'. base_url() .''.str_replace("_","-",$table).'/add" class="btn btn-sm btn-primary btn-block float-right"><i class="fas fa-plus"></i> Add '.ucwords(str_replace('_', ' ', $table)) .'</a>';
+				switch($table)
+				{
+					case 'parameter_items':
+						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#frmParameterItems"><i class="fas fa-plus"></i> Add Parameter</button>';
+						break;
+					default:
+						echo  '<a href="'. base_url() .''.str_replace("_","-",$table).'/add" class="btn btn-sm btn-primary btn-block float-right"><i class="fas fa-plus"></i> Add '.ucwords(str_replace('_', ' ', $table)) .'</a>';
+						break;
+				}
 				break;
 			}
 		}
@@ -133,7 +141,7 @@ if (! function_exists('users_action'))
 						echo '<a class="btn btn-warning btn-sm" title="edit" href="'. base_url() .''.str_replace("_","-",$table).'/'.$permission['func_action'].'/'. $id.'"><i class="far fa-edit"></i></a> ';
 						break;
 					case 'delete':
-						echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.str_replace("_","-",$table).'/delete/\','.$id.')" title="delete"><i class="far fa-trash-alt"></i></a>';
+						echo  '<a class="btn btn-danger btn-sm remove" onClick="confirmDelete(\''.base_url().''.str_replace("_","-",$table).'/delete/\','.$id.')" title="delete"><i class="far fa-trash-alt"></i></a>';
 						break;
 				}
 			}

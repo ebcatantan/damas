@@ -26,7 +26,7 @@
       <div class="row">
         <div class="col-md-6 offset-md-3">
           <div class="form-group">
-            <label for="document_type_name">Department Name</label>
+            <label for="document_type_name">Document Type Name</label>
             <input name="document_type_name" type="text" value="<?= isset($rec['document_type_name']) ? $rec['document_type_name'] : set_value('document_type_name') ?>" class="form-control <?= $errors['document_type_name'] ? 'is-invalid':'is-valid' ?>" id="document_type_name" placeholder="Document Type Name">
               <?php if($errors['document_type_name']): ?>
                 <div class="invalid-feedback">

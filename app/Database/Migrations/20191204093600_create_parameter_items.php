@@ -26,12 +26,20 @@ class CreateParameterItems extends \CodeIgniter\Database\Migration {
                                 'null'           => TRUE,
                         ],
 
-                        'document_attachments' => [
-                                'type'           => 'TEXT',
-                                'comment'           => 'academic_document_ids of the attached document',
+                        'tagged_documents' => [
+                                'type'           => 'JSON',
+                                'comment'           => 'academic_document_ids of the tagged documents',
                         ],
 
                         'parameter_section_id' => [
+                                'type'           => 'BIGINT',
+                        ],
+
+                        ' accreditation_template_id' => [
+                                'type'           => 'BIGINT',
+                        ],
+
+                        'template_parameter_id' => [
                                 'type'           => 'BIGINT',
                         ],
 
@@ -44,7 +52,7 @@ class CreateParameterItems extends \CodeIgniter\Database\Migration {
                                 'constraint'     => '1',
                                 'default'        => 'a'
                         ],
-                        
+
                         'created_at' => [
                                 'type'           => 'DATETIME',
                                 'comment'        => 'Date of creation',

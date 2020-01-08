@@ -1,6 +1,6 @@
 <?php namespace App\Database\Migrations;
 
-class CreateAreaTemplates extends \CodeIgniter\Database\Migration {
+class CreateAccreditationTemplates extends \CodeIgniter\Database\Migration {
 
         public function up()
         {
@@ -31,6 +31,10 @@ class CreateAreaTemplates extends \CodeIgniter\Database\Migration {
                                 'type'           => 'BIGINT',
                         ],
 
+                        'academic_program_id' => [
+                                'type'           => 'BIGINT',
+                        ],
+
                         'area_id' => [
                                 'type'           => 'BIGINT',
                         ],
@@ -40,7 +44,7 @@ class CreateAreaTemplates extends \CodeIgniter\Database\Migration {
                                 'constraint'     => '1',
                                 'default'        => 'a'
                         ],
-                        
+
                         'is_finalized' => [
                                 'type'           => 'INT',
                                 'constraint'     => '1',
@@ -51,7 +55,7 @@ class CreateAreaTemplates extends \CodeIgniter\Database\Migration {
                                 'type'           => 'BIGINT',
                                 'comment'        => 'User ID of the template creator',
                         ],
-                        
+
                         'created_at' => [
                                 'type'           => 'DATETIME',
                                 'comment'        => 'Date of creation',
@@ -71,11 +75,11 @@ class CreateAreaTemplates extends \CodeIgniter\Database\Migration {
                         ]
                 ]);
                 $this->forge->addKey('id', TRUE);
-                $this->forge->createTable('area_templates');
+                $this->forge->createTable('accreditation_templates');
         }
 
         public function down()
         {
-                $this->forge->dropTable('area_templates');
+                $this->forge->dropTable('accreditation_templates');
         }
 }
