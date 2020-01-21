@@ -48,7 +48,7 @@
 <br>
 <div class="container" id="parameter_items">
   <div class="row">
-    <table class="table">
+    <!-- <table class="table">
       <thead class="thead-dark table-bordered">
         <tr class="text-center">
           <th scope="col">Parameter</th>
@@ -57,9 +57,10 @@
         </tr>
       </thead>
       <tbody>
-
       </tbody>
     </table>
+    -->
+    item here
   </div>
 </div>
 <?php  echo view('Modules\Accreditation\Views\parameter_items\frmParameterItemModal'); ?>

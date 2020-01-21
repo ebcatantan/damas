@@ -193,6 +193,48 @@ class Validation
 				],
     ];
 
+    public $addParameterItem = [
+        'parameter_item' => [
+            'label'  => 'Program Item',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'Parameter field is required.'
+            ]
+        ],
+
+        'description' => [
+            'label'  => 'Parameter Item Details / Description',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'parameter item details / desciption field is required.'
+            ]
+        ],
+
+        'document_needed_list' => [
+            'label'  => 'Needed Documents',
+            'rules'  => 'required',
+            'errors' => [
+                'required' => 'needed document field is required.'
+            ]
+        ],
+
+				'parameter_section_id' => [
+						'label'  => 'Parameter Section',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Parameter Section field is required.'
+						]
+				],
+
+				'template_parameter_id' => [
+						'label'  => 'Parameter Name',
+						'rules'  => 'required',
+						'errors' => [
+								'required' => 'Parameter Name field is required.'
+						]
+				],
+    ];
+
 	public $user = [
         'lastname' => [
             'label'  => 'Lastname',

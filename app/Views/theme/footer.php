@@ -20,12 +20,13 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="<?= base_url() ?>/public/js/jquery-3.3.1.slim.min.js"></script> -->
-    <script src="<?= base_url() ?>/public/js/jquery-3.2.1.min.js"></script>
-    <script src="<?= base_url() ?>/public/js/popper.min.js"></script>
-    <script src="<?= base_url() ?>/public/js/bootstrap.min.js"></script>
-    <script src="<?= base_url() ?>/public/js/sweetalert2@9.js"></script>
-    <script src="<?= base_url() ?>/public/js/myAlerts.js"></script>
-    <script src="<?= base_url() ?>/public/js/user_profile.js"></script>
+    <script src="<?= base_url() ?>public/js/jquery-3.4.1.min.js"></script>
+    <script src="<?= base_url() ?>public/js/popper.min.js"></script>
+    <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
+    <script src="<?= base_url() ?>public/js/sweetalert2@9.js"></script>
+    <script src="<?= base_url() ?>public/js/myAlerts.js"></script>
+    <script type="text/javascript" src="<?= base_url() ?>public/js/myJavascript.js"></script>
+    <script src="<?= base_url() ?>public/js/user_profile.js"></script>
     <script>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
@@ -33,7 +34,6 @@
     </script>
     <script type="text/javascript">
     $(document).ready(function(){
-      // alert(1);
          $('#user_credential_submit').on('click', function(event){
              event.preventDefault();
              var strUrl = '';

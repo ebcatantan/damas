@@ -3,16 +3,20 @@ namespace Modules\Accreditation\Models;
 
 use CodeIgniter\Model;
 
-class ParameterItemsModel extends \CodeIgniter\Model
+class TemplateParametersModel extends \CodeIgniter\Model
 {
-    protected $table = 'parameter_items';
+    protected $table = 'template_parameters';
 
-    protected $allowedFields = ['parameter_item', 'description', 'document_needed_list', 'tagged_documents', 'parameter_section_id', 'accreditation_template_id', 'template_parameter_id', 'parent_parameter_item_id', 'status', 'created_at','updated_at', 'deleted_at'];
+    protected $allowedFields = ['parameter_code', 'title', 'description', 'status', 'created_at','updated_at', 'deleted_at'];
 
-  public function getParameterItemsWithAccreditationTemplateId($accreditation_template_id)
-	{
-    return $this->where(['accreditation_template_id'=>$accreditation_template_id, 'status'=>'a'])->findAll();
-	}
+    public function getTemplateParameters()
+    {
+        return $this->findAll();
+    }
+  // public function getParameterItemsWithAccreditationTemplateId($accreditation_template_id)
+	// {
+  //   return $this->where(['accreditation_template_id'=>$accreditation_template_id, 'status'=>'a'])->findAll();
+	// }
 
 	// public function getAccreditataionTemplateWithFunction($args = [])
 	// {
@@ -26,14 +30,14 @@ class ParameterItemsModel extends \CodeIgniter\Model
   // 	$query = $db->query($str);
 	//   return $query->getResultArray();
 	// }
-
-    public function addParameterItem($val_array = [])
-  	{
-  		$val_array['created_at'] = (new \DateTime())->format('Y-m-d H:i:s');
-  		$val_array['status'] = 'a';
-
-      return $this->save($val_array);
-  	}
+  //
+  //
+  //   public function addAccreditationTemplate($val_array = [])
+  // 	{
+  // 		$val_array['created_at'] = (new \DateTime())->format('Y-m-d H:i:s');
+  // 		$val_array['status'] = 'a';
+  // 	  return $this->save($val_array);
+  // 	}
   //
   //   public function editArea($val_array = [], $id)
   // 	{

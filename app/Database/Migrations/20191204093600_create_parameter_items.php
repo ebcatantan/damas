@@ -29,13 +29,14 @@ class CreateParameterItems extends \CodeIgniter\Database\Migration {
                         'tagged_documents' => [
                                 'type'           => 'JSON',
                                 'comment'           => 'academic_document_ids of the tagged documents',
+                                'null'           => TRUE,
                         ],
 
                         'parameter_section_id' => [
                                 'type'           => 'BIGINT',
                         ],
 
-                        ' accreditation_template_id' => [
+                        'accreditation_template_id' => [
                                 'type'           => 'BIGINT',
                         ],
 
@@ -45,6 +46,7 @@ class CreateParameterItems extends \CodeIgniter\Database\Migration {
 
                         'parent_parameter_item_id' => [
                                 'type'           => 'BIGINT',
+                                'default'        => '0'
                         ],
 
                         'status' => [

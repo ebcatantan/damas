@@ -4,6 +4,8 @@ namespace Modules\Accreditation\Controllers;
 use Modules\Accreditation\Models\AccreditationTemplatesModel;
 use Modules\Accreditation\Models\AccreditationLevelsModel;
 use Modules\Accreditation\Models\ParameterItemsModel;
+use Modules\Accreditation\Models\ParameterSectionsModel;
+use Modules\Accreditation\Models\TemplateParametersModel;
 use Modules\SystemSettings\Models\AreasModel;
 use Modules\SystemSettings\Models\ProgramsModel;
 use Modules\UserManagement\Models\PermissionsModel;
@@ -91,18 +93,24 @@ class AccreditationTemplates extends BaseController
     	}
     }
 
-    public function show_accreditation_template($id)
+   public function show_accreditation_template($id)
 	 {
-
 		$this->hasPermissionRedirect('show-accreditation-template');
 		$data['permissions'] = $this->permissions;
 
 		$parameter_item_model = new ParameterItemsModel();
+		$parameter_section_model = new ParameterSectionsModel();
+		$template_parameter_model = new TemplateParametersModel();
+
 		$model = new AccreditationTemplatesModel();
 		$data['parameter_items'] = $parameter_item_model->getParameterItemsWithCondition(['accreditation_template_id'=>$id]);
+
+		// $data['parent_parameter_items'] = $parameter_item_model->getParameterItemsWithCondition(['accreditation_template_id'=>$id]);
+
+		$data['parameter_sections'] = $parameter_section_model->getParameterSections();
+		$data['template_parameters'] = $template_parameter_model->getTemplateParameters();
 		// print_r($data['parameter_items']); die();
 		$data['accreditation_template'] = $model->getAccreditataionTemplateById($id);
-		// print_r($data['accreditation_template']); die();
 		$data['function_title'] = "Accreditation Template Details";
     $data['viewName'] = 'Modules\Accreditation\Views\accreditation_templates\accreditationTemplateDetails';
     echo view('App\Views\theme\index', $data);
@@ -171,4 +179,42 @@ class AccreditationTemplates extends BaseController
     	$model->deleteAccreditationTemplate($id);
     }
 
+		public function add_parameter_item()
+		{
+			helper(['form', 'url']);
+			if(!empty($_POST))
+    	{
+				if (!$this->validate('addParameterItem'))
+				{
+					$data['errors'] = \Config\Services::validation()->getErrors();
+					return $data['errors'];
+				}
+				else
+				{
+					$data = [
+						'parameter_item' => $_POST['parameter_item'],
+						'description' => $_POST['description'],
+						'document_needed_list' => $_POST['document_needed_list'],
+						'template_parameter_id' => intval($_POST['template_parameter_id']),
+						'parameter_section_id' => intval($_POST['parameter_section_id']),
+						'parent_parameter_item_id' => 0,
+						'tagged_documents' => null,
+						'accreditation_template_id' => intval($_POST['accreditation_template_id'])
+					];
+
+					//return json_encode($data);
+
+					$parameter_item_model = new ParameterItemsModel();
+				 	if($parameter_item_model->addParameterItem($data))
+					{
+						return json_encode(true);
+					}
+					else
+					{
+						return json_encode(false);
+					}
+
+				}
+			}
+		}
 }
