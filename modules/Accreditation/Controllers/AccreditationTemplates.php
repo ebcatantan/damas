@@ -103,9 +103,14 @@ class AccreditationTemplates extends BaseController
 		$template_parameter_model = new TemplateParametersModel();
 
 		$model = new AccreditationTemplatesModel();
-		$data['parameter_items'] = $parameter_item_model->getParameterItemsWithCondition(['accreditation_template_id'=>$id]);
+		$data['parameter_items'] = $parameter_item_model->getParameterItemsWithAccreditationTemplateId(['accreditation_template_id'=>$id]);
+		$data["item_parameters"] = $template_parameter_model->getDistictParametersInParameterItem($id);
 
-		// $data['parent_parameter_items'] = $parameter_item_model->getParameterItemsWithCondition(['accreditation_template_id'=>$id]);
+		// print_r($data["item_parameters"]); die();
+
+
+		$data['parameter_items_views'] = $parameter_item_model->getParameterItems(['accreditation_template_id'=>$id, 'template_parameter_id'=>$data["item_parameters"][0]['id']]);
+		// print_r($data["parameter_items_views"]); die();
 
 		$data['parameter_sections'] = $parameter_section_model->getParameterSections();
 		$data['template_parameters'] = $template_parameter_model->getTemplateParameters();
@@ -181,6 +186,7 @@ class AccreditationTemplates extends BaseController
 
 		public function add_parameter_item()
 		{
+			// wala pang permissions ito
 			helper(['form', 'url']);
 			if(!empty($_POST))
     	{
@@ -191,29 +197,34 @@ class AccreditationTemplates extends BaseController
 				}
 				else
 				{
+					$parent_item = 0;
+
+					if(!empty(isset($_POST['parent_parameter_item_id'])))
+					{
+						$parent_item = $_POST['parent_parameter_item_id'];
+					}
+
 					$data = [
 						'parameter_item' => $_POST['parameter_item'],
 						'description' => $_POST['description'],
 						'document_needed_list' => $_POST['document_needed_list'],
 						'template_parameter_id' => intval($_POST['template_parameter_id']),
 						'parameter_section_id' => intval($_POST['parameter_section_id']),
-						'parent_parameter_item_id' => 0,
+						'parent_parameter_item_id' => $parent_item,
 						'tagged_documents' => null,
 						'accreditation_template_id' => intval($_POST['accreditation_template_id'])
 					];
 
-					//return json_encode($data);
-
 					$parameter_item_model = new ParameterItemsModel();
-				 	if($parameter_item_model->addParameterItem($data))
-					{
-						return json_encode(true);
-					}
-					else
-					{
-						return json_encode(false);
-					}
-
+					return json_encode($parameter_item_model->addParameterItem($data));
+				 	// if($parameter_item_model->addParameterItem($data))
+					// {
+					// 	return json_encode(true);
+					// }
+					// else
+					// {
+					// 	return json_encode(false);
+					// }
 				}
 			}
 		}

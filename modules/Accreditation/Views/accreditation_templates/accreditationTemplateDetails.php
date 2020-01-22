@@ -46,21 +46,46 @@
  <?php user_add_link('parameter_items', $_SESSION['userPermmissions']) ?>
 </div>
 <br>
+
 <div class="container" id="parameter_items">
   <div class="row">
-    <!-- <table class="table">
+    <div class="col-md-12">
+      <!-- $data["item_parameters"] -->
+      <ul class="nav nav-tabs">
+        <?php if(!empty(isset($item_parameters))): ?>
+          <?php foreach ($item_parameters as $item_parameter): ?>
+            <li class="nav-item">
+              <a class="ml-2 btn btn-outline-secondary" onClick= "parameterItems(<?= $item_parameter['template_parameter_id'] ?>, <?= $item_parameter['accreditation_template_id'] ?>)"  href="#"><?= strtoupper($item_parameter['parameter_code']) ?><br><?= ucwords($item_parameter['title']) ?></a>
+            </li>
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <table id="indicators-table" class="table">
       <thead class="thead-dark table-bordered">
         <tr class="text-center">
-          <th scope="col">Parameter</th>
+          <th scope="col">Indicators</th>
           <th scope="col">Document Needed</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
+      <?php if(isset($parameter_items_views)): ?>
+        <?php foreach ($parameter_items_views as $indicators): ?>
+          <tr class="text-center">
+            <td scope="col"><?= ucwords($indicators['parameter_item']) ?></td>
+            <td scope="col"><?= ucwords($indicators['document_needed_list'])?></td>
+            <td scope="col">Action</td>
+          </tr>
+        <?php endforeach; ?>
+      <?php endif; ?>
+      <tbody>
       </tbody>
     </table>
-    -->
-    item here
+
   </div>
 </div>
 <?php  echo view('Modules\Accreditation\Views\parameter_items\frmParameterItemModal'); ?>

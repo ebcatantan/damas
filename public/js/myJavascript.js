@@ -1,3 +1,28 @@
+function parameterItems(itemParameter, accreditation_template_id)
+{
+	event.preventDefault();
+
+	// alert('parameter_id = '+ itemParameter);
+	// alert('accreditation_template_id = '+ accreditation_template_id);
+	$.ajax({
+		type: "GET",
+		url: 'http://localhost/damas/accreditation-templates/show/1',
+		dataType : "HTML",
+		success: function(data)
+		{
+			alert(data);
+			// $('#indicators-table .tbody').
+		},
+		error: function(req, status, err)
+		{
+			alert('Something Went Wrong', status, err);
+		},
+	});
+
+	return false;
+}
+
+
 $("#submit_parameter_item").on('click', function(event){
 		event.preventDefault();
 		var base_url = $("#baseurl").val();
@@ -17,14 +42,23 @@ $("#submit_parameter_item").on('click', function(event){
 			data : {parameter_item:parameter_item , description:description, document_needed_list:document_needed_list, parameter_section_id:parameter_section_id, accreditation_template_id:accreditation_template_id, template_parameter_id:template_parameter_id, parent_parameter_item_id:parent_parameter_item_id},
 			success: function(data)
 			{
-					alert("success posting feed.");
-          console.log('Submission was successful.');
+					alert("Success in Adding Indecator / Parameter Item.");
+
+					$('#parameter_item').val("");
+					$('#description').val("");
+					$('#document_needed_list').val("");
+					$('#parameter_section_id').val("");
+					$('#accreditation_template_id').val("");
+					$('#template_parameter_id').val("");
+					$('#parent_parameter_item_id').val("");
+					$('#frmParameterItems').modal('hide');
+
           console.log(data);
       },
 			error: function(req, status, err)
 			{
-				alert('something went wrong', status, err);
-				console.log(req);
+				alert('Something Went Wrong', status, err);
+				// console.log(req);
 		  },
 		});
 		 return false;

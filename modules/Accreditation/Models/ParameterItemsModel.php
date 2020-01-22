@@ -14,6 +14,24 @@ class ParameterItemsModel extends \CodeIgniter\Model
     return $this->where(['accreditation_template_id'=>$accreditation_template_id, 'status'=>'a'])->findAll();
 	}
 
+  public function getParameterItems($args = [])
+	{
+    $dataCondition = [];
+
+    if(!empty($args))
+    {
+      foreach($args as $key => $val)
+      {
+        $dataCondition = [$key => $val];
+      }
+
+      $dataCondition = ['status'=>'a'];
+    }
+    return $this->where($dataCondition)->findAll();
+	}
+
+
+
 	// public function getAccreditataionTemplateWithFunction($args = [])
 	// {
 	// 	$db = \Config\Database::connect();
@@ -34,6 +52,7 @@ class ParameterItemsModel extends \CodeIgniter\Model
 
       return $this->save($val_array);
   	}
+
   //
   //   public function editArea($val_array = [], $id)
   // 	{

@@ -13,6 +13,20 @@ class TemplateParametersModel extends \CodeIgniter\Model
     {
         return $this->findAll();
     }
+
+    public function getDistictParametersInParameterItem($accreditation_template_id)
+    {
+      $db = \Config\Database::connect();
+
+      $str = "SELECT DISTINCT(`b`.`template_parameter_id`), `b`.`accreditation_template_id`, a.* ";
+      $str .= "FROM parameter_items b ";
+      $str .= "INNER JOIN template_parameters a ON b.template_parameter_id = a.id ";
+      $str .=" WHERE b.accreditation_template_id = '".$accreditation_template_id."'";
+      // print_r($str); die();
+    	$query = $db->query($str);
+      return $query->getResultArray();
+    }
+
   // public function getParameterItemsWithAccreditationTemplateId($accreditation_template_id)
 	// {
   //   return $this->where(['accreditation_template_id'=>$accreditation_template_id, 'status'=>'a'])->findAll();

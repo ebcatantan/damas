@@ -56,43 +56,57 @@ class CreateTemplateParameters extends \CodeIgniter\Database\Migration {
                 $data = [
                     [
                         'parameter_code' => 'parameter a',
-                        'title' => 'curriculum and program of studies',
-                        'description' => 'curriculum and program of studies',
+                        'title' => 'organization',
+                        'description' => 'organization',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
                         'parameter_code' => 'parameter b',
-                        'title' => 'faculty adequacy ad loading',
-                        'description' => 'faculty adequacy ad loading',
+                        'title' => 'academic administration',
+                        'description' => 'academic administration',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
                         'parameter_code' => 'parameter c',
-                        'title' => 'assessment of academic performance',
-                        'description' => 'assessment of academic performance',
+                        'title' => 'student administration',
+                        'description' => 'student administration',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
                         'parameter_code' => 'parameter d',
-                        'title' => 'management of learning',
-                        'description' => 'management of learning',
+                        'title' => 'financial management',
+                        'description' => 'financial management',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
                         'parameter_code' => 'parameter e',
-                        'title' => 'graduation requirements',
-                        'description' => 'graduation requirements',
+                        'title' => 'supply management',
+                        'description' => 'supply management',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
                         'parameter_code' => 'parameter f',
-                        'title' => 'administrative support for effective instruction',
-                        'description' => 'administrative support for effective instruction',
+                        'title' => 'records management',
+                        'description' => 'records management',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'parameter_code' => 'parameter g',
+                        'title' => 'institutional planning and development',
+                        'description' => 'institutional planning and development',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                        'parameter_code' => 'parameter h',
+                        'title' => 'performance of administrative personnels',
+                        'description' => 'performance of administrative personnel',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],

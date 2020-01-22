@@ -10,3 +10,8 @@ $routes->group('accreditation-templates', ['namespace' => 'Modules\Accreditation
 
     $routes->match(['get', 'post'], 'add-parameter-item', 'AccreditationTemplates::add_parameter_item');
 });
+
+$routes->group('parameter-items', ['namespace' => 'Modules\Accreditation\Controllers'], function($routes)
+{
+  $routes->get('get-items/(:num)/(:num)', 'ParamerItems::getItems/$1/$1');
+});
