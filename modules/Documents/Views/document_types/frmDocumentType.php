@@ -14,8 +14,8 @@
         <div class="col-md-6 offset-md-3">
           <div class="form-group">
             <label for="document_type_code">Document Type Code</label>
-            <input name="document_type_code" type="text" value="<?= isset($rec['document_type_code']) ? $rec['document_type_code'] : set_value('document_type_code') ?>" class="form-control <?= $errors['document_type_code'] ? 'is-invalid':'is-valid' ?>" id="document_type_code" placeholder="Document Type Code">
-              <?php if($errors['document_type_code']): ?>
+            <input name="document_type_code" type="text" value="<?= isset($rec['document_type_code']) ? $rec['document_type_code'] : set_value('document_type_code') ?>" class="form-control <?= isset($errors['document_type_code']) ? 'is-invalid':'is-valid' ?>" id="document_type_code" placeholder="Document Type Code">
+              <?php if(isset($errors['document_type_code'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['document_type_code'] ?>
                 </div>
@@ -27,8 +27,8 @@
         <div class="col-md-6 offset-md-3">
           <div class="form-group">
             <label for="document_type_name">Document Type Name</label>
-            <input name="document_type_name" type="text" value="<?= isset($rec['document_type_name']) ? $rec['document_type_name'] : set_value('document_type_name') ?>" class="form-control <?= $errors['document_type_name'] ? 'is-invalid':'is-valid' ?>" id="document_type_name" placeholder="Document Type Name">
-              <?php if($errors['document_type_name']): ?>
+            <input name="document_type_name" type="text" value="<?= isset($rec['document_type_name']) ? $rec['document_type_name'] : set_value('document_type_name') ?>" class="form-control <?= isset($errors['document_type_name']) ? 'is-invalid':'is-valid' ?>" id="document_type_name" placeholder="Document Type Name">
+              <?php if(isset($errors['document_type_name'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['document_type_name'] ?>
                 </div>
@@ -40,8 +40,8 @@
         <div class="col-md-6 offset-md-3">
           <div class="form-group">
             <label for="description">Document Type Description</label>
-            <textarea name="description" type="text" class="form-control <?= $errors['description'] ? 'is-invalid':'is-valid'  ?>" id="description" placeholder="Role Description" rows="5"><?= isset($rec['description']) ? $rec['description'] : set_value('description') ?></textarea>
-            <?php if($errors['description']): ?>
+            <textarea name="description" type="text" class="form-control <?= isset($errors['description']) ? 'is-invalid':'is-valid'  ?>" id="description" placeholder="Role Description" rows="5"><?= isset($rec['description']) ? $rec['description'] : set_value('description') ?></textarea>
+            <?php if(isset($errors['description'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['description'] ?>
                 </div>

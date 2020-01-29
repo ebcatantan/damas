@@ -18,14 +18,23 @@ class AcademicDocuments extends BaseController
 
 		$user_details_model = new UserDetailsModel();
 		$user_credentials = $user_details_model->where('user_id', $_SESSION['uid'])->find();
+		//print_r($user_credentials); die();
 
-		if(!isset($_SESSION['user_details']))
+		if(!isset($_SESSION['user_area_id']))
 		{
-			$_SESSION['user_details'] = [
-				'user_id' => $user_credentials[0]['user_id'],
-				'area_id' => $user_credentials[0]['area_id'],
-				'academic_program_id' => $user_credentials[0]['academic_program_id'],
-			];
+			if(!empty($user_credentials['area_id']))
+			{
+				$_SESSION['user_area_id'] = $user_credentials['area_id'];
+			}
+
+			if(!empty($user_credentials['academic_program_id']))
+			{
+					$_SESSION['user_academic_program_id'] = $user_credentials['academic_program_id'];
+			}
+			// $_SESSION['user_details'] = [
+			// 	'area_id' => $user_credentials['area_id'],
+			// 	'academic_program_id' => $user_credentials[0]['academic_program_id'],
+			// ];
 		}
 
 	  // print_r($_SESSION['user_details']['academic_program_id']); die();
@@ -51,6 +60,28 @@ class AcademicDocuments extends BaseController
       $data['function_title'] = "Academic Document List";
       $data['viewName'] = 'Modules\Documents\Views\academic_documents\index';
       echo view('App\Views\theme\index', $data);
+    }
+
+    public function showAllDocuments($offset = 0)
+    {
+			// print_r($_SESSION['user_details']); die();
+			$model_document_types = new DocumentTypesModel();
+			$data['document_types'] = $model_document_types->where('status', 'a')->findAll();
+
+    	//$this->hasPermissionRedirect('list-academic-document');
+    	$model = new AcademicDocumentsModel();
+
+     	$data['all_items'] = $model->getAcademicDocumentWithCondition(['status'=> 'a']);
+     	$data['offset'] = $offset;
+
+      $data['academic_documents'] = $model->getAcademicDocumentWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
+			// die("here");
+
+			// print_r($data['academic_documents']); die();
+
+      $data['function_title'] = "Academic Document List";
+      //$data['viewName'] = 'Modules\Documents\Views\academic_documents\index';
+      echo view('Modules\Documents\Views\academic_documents\show_all', $data);
     }
 
     public function show_academic_document($id)

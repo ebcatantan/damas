@@ -82,7 +82,7 @@ class Users extends BaseController
 	{
 		$this->hasPermissionRedirect('user-own-profile');
 
-		if($id != $_SESSION['rid'])
+		if($id != $_SESSION['uid'])
 		{
 			header('Location: '.base_url());
 			session_destroy();

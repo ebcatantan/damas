@@ -9,6 +9,7 @@ use Modules\Accreditation\Models\TemplateParametersModel;
 use Modules\SystemSettings\Models\AreasModel;
 use Modules\SystemSettings\Models\ProgramsModel;
 use Modules\UserManagement\Models\PermissionsModel;
+use Modules\Documents\Models\AcademicDocumentsModel;
 // use Modules\UserManagement\Models\UsersModel;
 use App\Controllers\BaseController;
 
@@ -19,7 +20,6 @@ class AccreditationTemplates extends BaseController
 	public function __construct()
 	{
 		parent:: __construct();
-
 		$permissions_model = new PermissionsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 	}
@@ -95,6 +95,7 @@ class AccreditationTemplates extends BaseController
 
    public function show_accreditation_template($id)
 	 {
+
 		$this->hasPermissionRedirect('show-accreditation-template');
 		$data['permissions'] = $this->permissions;
 
@@ -110,11 +111,14 @@ class AccreditationTemplates extends BaseController
 
 
 		$data['parameter_items_views'] = $parameter_item_model->getParameterItems(['accreditation_template_id'=>$id, 'template_parameter_id'=>$data["item_parameters"][0]['id']]);
-		// print_r($data["parameter_items_views"]); die();
+		$data['parameterName'] = $template_parameter_model->find($data["item_parameters"][0]['id']);
+		 // print_r($template_parameter_model->getLastQuery()); die();
+
+		 $model_documents = new AcademicDocumentsModel();
+		 $data['documents'] = $model_documents->getAcademicDocumentWithCondition(['status'=> 'a']);
 
 		$data['parameter_sections'] = $parameter_section_model->getParameterSections();
 		$data['template_parameters'] = $template_parameter_model->getTemplateParameters();
-		// print_r($data['parameter_items']); die();
 		$data['accreditation_template'] = $model->getAccreditataionTemplateById($id);
 		$data['function_title'] = "Accreditation Template Details";
     $data['viewName'] = 'Modules\Accreditation\Views\accreditation_templates\accreditationTemplateDetails';

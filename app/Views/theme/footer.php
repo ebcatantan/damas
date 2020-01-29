@@ -24,12 +24,20 @@
     <script src="<?= base_url() ?>public/js/popper.min.js"></script>
     <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>public/js/sweetalert2@9.js"></script>
+    <script src="<?= base_url() ?>public/select2/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+      var baseURL = "<?php echo base_url(); ?>";
+    </script>
     <script src="<?= base_url() ?>public/js/myAlerts.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>public/js/myJavascript.js"></script>
     <script src="<?= base_url() ?>public/js/user_profile.js"></script>
     <script>
         $(document).ready(function() {
             $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
         });
     </script>
     <script type="text/javascript">

@@ -40,6 +40,7 @@ class AccreditationTemplatesModel extends \CodeIgniter\Model
     $str .= "LEFT JOIN academic_programs c ON a.academic_program_id = c.id ";
     $str .= "LEFT JOIN areas d ON a.area_id = d.id ";
     $str .=" WHERE a.id = ".$id;
+    // die($str);
   	$query = $db->query($str);
 	  return $query->getResultArray();
 	}

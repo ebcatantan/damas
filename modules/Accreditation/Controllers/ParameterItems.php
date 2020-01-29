@@ -5,10 +5,11 @@ namespace Modules\Accreditation\Controllers;
 // use Modules\Accreditation\Models\AccreditationLevelsModel;
 use Modules\Accreditation\Models\ParameterItemsModel;
 // use Modules\Accreditation\Models\ParameterSectionsModel;
-// use Modules\Accreditation\Models\TemplateParametersModel;
+use Modules\Accreditation\Models\TemplateParametersModel;
 // use Modules\SystemSettings\Models\AreasModel;
 // use Modules\SystemSettings\Models\ProgramsModel;
-// use Modules\UserManagement\Models\PermissionsModel;
+use Modules\UserManagement\Models\PermissionsModel;
+use Modules\Documents\Models\AcademicDocumentsModel;
 // use Modules\UserManagement\Models\UsersModel;
 use App\Controllers\BaseController;
 
@@ -26,7 +27,23 @@ class ParameterItems extends BaseController
 
 	 public function getItems($itemParameter, $accreditation_template_id)
 	 {
-		 echo "pogi";
+		 $model_documents = new AcademicDocumentsModel();
+ 		$data['documents'] = $model_documents->getAcademicDocumentWithCondition(['status'=> 'a']);
+
+		 $model = new ParameterItemsModel();
+		 $data['parameter_items_views'] = $model->getParameterItems(['template_parameter_id'=>$itemParameter, 'accreditation_template_id'=>$accreditation_template_id]);
+
+		 $template_parameter_model = new TemplateParametersModel();
+		 $data['parameterName'] = $template_parameter_model->find($itemParameter);
+
+		 $data['function_title'] = "Create New Accreditation Template";
+		 echo view('Modules\Accreditation\Views\parameter_items\parameter_indicators', $data);
+	 }
+
+	 public function tagdocuments()
+	 {
+		 $model = new ParameterItemsModel();
+		 return json_encode($model->updateDocumentsTagged($_POST['tagged_documents'], $_POST['id']));
 	 }
 
 	//

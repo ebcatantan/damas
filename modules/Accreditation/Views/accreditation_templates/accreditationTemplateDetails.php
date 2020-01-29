@@ -55,7 +55,7 @@
         <?php if(!empty(isset($item_parameters))): ?>
           <?php foreach ($item_parameters as $item_parameter): ?>
             <li class="nav-item">
-              <a class="ml-2 btn btn-outline-secondary" onClick= "parameterItems(<?= $item_parameter['template_parameter_id'] ?>, <?= $item_parameter['accreditation_template_id'] ?>)"  href="#"><?= strtoupper($item_parameter['parameter_code']) ?><br><?= ucwords($item_parameter['title']) ?></a>
+              <a class="ml-2 mt-2 btn btn-outline-secondary" onClick= "parameterItems(<?= $item_parameter['template_parameter_id'] ?>, <?= $item_parameter['accreditation_template_id'] ?>)"  href="#"><?= strtoupper($item_parameter['parameter_code']) ?><br><?= ucwords($item_parameter['title']) ?></a>
             </li>
           <?php endforeach; ?>
         <?php endif; ?>
@@ -63,30 +63,45 @@
     </div>
   </div>
   <br>
-  <div class="row">
-    <table id="indicators-table" class="table">
-      <thead class="thead-dark table-bordered">
-        <tr class="text-center">
-          <th scope="col">Indicators</th>
-          <th scope="col">Document Needed</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-      <?php if(isset($parameter_items_views)): ?>
-        <?php foreach ($parameter_items_views as $indicators): ?>
+  <div id="indicators" class="row">
+    <div class="col-12">
+      <h3 id="title"><?= strtoupper($parameterName['parameter_code']) ?><br><?= ucwords($parameterName['title']) ?></h3>
+      <table id="indicators-table" class="table">
+        <thead class="thead-dark table-bordered">
           <tr class="text-center">
-            <td scope="col"><?= ucwords($indicators['parameter_item']) ?></td>
-            <td scope="col"><?= ucwords($indicators['document_needed_list'])?></td>
-            <td scope="col">Action</td>
+            <th scope="col">Indicators</th>
+            <th scope="col">Document Needed</th>
+            <th scope="col">Attached Documents</th>
+            <th scope="col">Action</th>
           </tr>
-        <?php endforeach; ?>
-      <?php endif; ?>
-      <tbody>
-      </tbody>
-    </table>
-
+        </thead>
+        <tbody>
+          <?php if(isset($parameter_items_views)): ?>
+            <?php foreach ($parameter_items_views as $indicators): ?>
+              <tr class="text-center">
+                <td scope="col"><?= ucwords($indicators['parameter_item']) ?></td>
+                <td scope="col"><?= ucwords($indicators['document_needed_list'])?></td>
+                <td scope="col">
+                  <!-- <button id="document_tagging" data-parameterItem="<?= $indicators['id'] ?>" data-toggle="modal" data-target="#documentListForTagging" class="btn btn-info btn-sm"> -->
+                  <?php if (empty($indicators['tagged_documents'])): ?>
+                    [No Tagged Documents]
+                  <?php else: ?>
+                    <?php getdocuments($indicators['tagged_documents'], $documents) ?>
+                  <?php endif; ?>
+                  <br>
+                  <button onClick= "getAllDocuments(<?=$indicators['id']?>,<?= $indicators['accreditation_template_id'] ?>)" class="btn btn-info btn-sm">
+                    <i class="fas fa-tags"></i> Tag Document(s)
+                  </button>
+                </td>
+                <td scope="col">Action</td>
+              </tr>
+            <?php endforeach; ?>
+          <?php endif; ?>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <?php  echo view('Modules\Accreditation\Views\parameter_items\frmParameterItemModal'); ?>
+<?php  echo view('Modules\Accreditation\Views\parameter_items\frmDocumentListForTagging'); ?>
 <?php  //echo view('parammeter_items/frmParameterItemModal'); ?>

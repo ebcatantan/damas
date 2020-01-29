@@ -14,20 +14,15 @@ class ParameterItemsModel extends \CodeIgniter\Model
     return $this->where(['accreditation_template_id'=>$accreditation_template_id, 'status'=>'a'])->findAll();
 	}
 
-  public function getParameterItems($args = [])
+  public function getParameterItems($conditions = [])
 	{
-    $dataCondition = [];
-
-    if(!empty($args))
+    $conditions['status'] = 'a';
+    // print_r($conditions);
+    foreach($conditions as $key => $val)
     {
-      foreach($args as $key => $val)
-      {
-        $dataCondition = [$key => $val];
-      }
-
-      $dataCondition = ['status'=>'a'];
+      $this->where($key, $val);
     }
-    return $this->where($dataCondition)->findAll();
+    return $this->findAll();
 	}
 
 
@@ -53,13 +48,13 @@ class ParameterItemsModel extends \CodeIgniter\Model
       return $this->save($val_array);
   	}
 
-  //
-  //   public function editArea($val_array = [], $id)
-  // 	{
-  // 		$val_array['updated_at'] = (new \DateTime())->format('Y-m-d H:i:s');
-  // 		$val_array['status'] = 'a';
-  // 		return $this->update($id, $val_array);
-  // 	}
+    public function updateDocumentsTagged($tagged_document = [], $id)
+  	{
+      $data['tagged_documents'] = '['.implode(',',$tagged_document).']';
+  		$data['updated_at'] = (new \DateTime())->format('Y-m-d H:i:s');
+      // return $data;
+  		return $this->update($id, $data);
+  	}
   //
   //   public function deleteArea($id)
 	// {

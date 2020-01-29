@@ -11,6 +11,7 @@ $routes->group('document-types', ['namespace' => 'Modules\Documents\Controllers'
 
 $routes->group('academic-documents', ['namespace' => 'Modules\Documents\Controllers'], function($routes)
 {
+    $routes->get('show-all', 'AcademicDocuments::showAllDocuments');
     $routes->get('/', 'AcademicDocuments::index');
     $routes->get('(:num)', 'AcademicDocuments::index/$1');
     $routes->get('show/(:num)', 'AcademicDocuments::show_academic_document/$1');

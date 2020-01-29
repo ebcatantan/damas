@@ -1,27 +1,72 @@
 function parameterItems(itemParameter, accreditation_template_id)
 {
 	event.preventDefault();
-
-	// alert('parameter_id = '+ itemParameter);
+	var url =  baseURL + 'parameter-items/get-items/' + itemParameter + '/' + accreditation_template_id;
+	// alert(url);
 	// alert('accreditation_template_id = '+ accreditation_template_id);
 	$.ajax({
 		type: "GET",
-		url: 'http://localhost/damas/accreditation-templates/show/1',
+		url: url,
 		dataType : "HTML",
 		success: function(data)
 		{
-			alert(data);
-			// $('#indicators-table .tbody').
+			$('#indicators').html(data);
 		},
 		error: function(req, status, err)
 		{
 			alert('Something Went Wrong', status, err);
 		},
 	});
-
 	return false;
 }
+//
+// function getAllDocuments()
+// {
+// 	var url = baseURL + 'academic-documents/show-all';
+// 	$.ajax({
+// 		type: "GET",
+// 		url: url,
+// 		dataType : "HTML",
+// 		success: function(data)
+// 		{
+// 			$('#docList').html(data);
+// 			$('#documentListForTagging').modal('show');
+// 		},
+// 		error: function(req, status, err)
+// 		{
+// 			alert('Something Went Wrong', status, err);
+// 		},
+// 	});
+// }
+function getAllDocuments(parameter_item_id, accre_id)
+{
+  $('#documentListForTagging').modal('show');
 
+	$('#btnTagging').on('click', function(event){
+		event.preventDefault();
+		var id = parameter_item_id;
+		var accretemplate_id = accre_id;
+		var tagged_documents = $('#academic_document_ids').val();
+		var url = baseURL + 'parameter-items/tagdocuments';
+		$.ajax({
+			type: "POST",
+			url: url,
+			dataType : "JSON",
+			data : {id:id , tagged_documents:tagged_documents},
+			success: function(data)
+			{
+					alert("Success in Adding Indecator / Parameter Item.");
+					$('#academic_document_ids').select2('val', '');
+					$('#documentListForTagging').modal('hide');
+          window.location.replace(baseURL + "/accreditation-templates/show/"+accretemplate_id);
+      },
+			error: function(req, status, err)
+			{
+				alert('Something Went Wrong', status, err);
+		  },
+		});
+	});
+}
 
 $("#submit_parameter_item").on('click', function(event){
 		event.preventDefault();
