@@ -32,18 +32,41 @@ class ParameterItemsModel extends \CodeIgniter\Model
 
 
 
-	// public function getAccreditataionTemplateWithFunction($args = [])
-	// {
-	// 	$db = \Config\Database::connect();
-  //
-	// 	$str = "SELECT a.*, b.accreditation_level, c.program_name, c.description, d.area_code, d.area_name FROM accreditation_templates a ";
-  //   $str .= "LEFT JOIN accreditation_levels b ON a.accreditation_level_id = b.id ";
-  //   $str .= "LEFT JOIN academic_programs c ON a.academic_program_id = c.id ";
-  //   $str .= "LEFT JOIN areas d ON a.area_id = d.id ";
-  //   $str .=" WHERE a.status = '".$args['status']."' LIMIT ". $args['offset'] .','.$args['limit'];
-  // 	$query = $db->query($str);
-	//   return $query->getResultArray();
-	// }
+	public function getAccreditataionTemplateWithFunction($args = [], $search = [])
+	{
+    $this->select('parameter_items.*');
+    $this->select('b.parameter_section_name');
+    $this->select('b.description');
+    $this->select('c.template_code');
+    $this->select('c.template_name');
+    $this->select('d.accreditation_level');
+    $this->select('e.program_name');
+    $this->select('f.area_name');
+    $this->select('g.title');
+
+    $this->join('parameter_sections b','parameter_items.parameter_section_id = b.id','left');
+    $this->join('accreditation_templates c','parameter_items.accreditation_template_id = c.id','left');
+    $this->join('accreditation_levels d','c.accreditation_level_id = d.id','left');
+    $this->join('academic_programs e','c.academic_program_id = e.id','left');
+    $this->join('areas f','c.area_id = f.id','left');
+    $this->join('template_parameters g','parameter_items.template_parameter_id = g.id','left');
+
+    $this->where('parameter_items.status', $args['status']);
+
+    if (isset($args['template_parameter_id']) || isset($args['accreditation_template_id'])) {
+      $this->where('parameter_items.template_parameter_id', $args['template_parameter_id']);
+      $this->where('parameter_items.accreditation_template_id', $args['accreditation_template_id']);
+    }
+    if (!empty($search)) {
+      foreach ($search as $field => $value) {
+        if ($value != null) {
+          $this->where('c.'.$field, $value);
+        }
+      }
+    }
+
+    return $this->findAll();
+	}
 
     public function addParameterItem($val_array = [])
   	{
@@ -52,6 +75,11 @@ class ParameterItemsModel extends \CodeIgniter\Model
 
       return $this->save($val_array);
   	}
+
+    public function tagDocuments($id, $value){
+      $val_array['tagged_documents'] = $value;
+      return $this->update($id, $val_array);
+    }
 
   //
   //   public function editArea($val_array = [], $id)

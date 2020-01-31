@@ -2,13 +2,15 @@
 namespace Modules\Accreditation\Controllers;
 //
 // use Modules\Accreditation\Models\AccreditationTemplatesModel;
-// use Modules\Accreditation\Models\AccreditationLevelsModel;
+use Modules\Accreditation\Models\AccreditationLevelsModel;
 use Modules\Accreditation\Models\ParameterItemsModel;
-// use Modules\Accreditation\Models\ParameterSectionsModel;
-// use Modules\Accreditation\Models\TemplateParametersModel;
-// use Modules\SystemSettings\Models\AreasModel;
-// use Modules\SystemSettings\Models\ProgramsModel;
-// use Modules\UserManagement\Models\PermissionsModel;
+use Modules\Documents\Models\AcademicDocumentsModel;
+use Modules\Documents\Models\DocumentTypesModel;
+use Modules\Accreditation\Models\ParameterSectionsModel;
+use Modules\Accreditation\Models\TemplateParametersModel;
+use Modules\SystemSettings\Models\AreasModel;
+use Modules\SystemSettings\Models\ProgramsModel;
+use Modules\UserManagement\Models\PermissionsModel;
 // use Modules\UserManagement\Models\UsersModel;
 use App\Controllers\BaseController;
 
@@ -19,219 +21,105 @@ class ParameterItems extends BaseController
 	public function __construct()
 	{
 		parent:: __construct();
-
 		$permissions_model = new PermissionsModel();
 		$this->permissions = $permissions_model->getPermissionsWithCondition(['status' => 'a']);
 	}
 
-	 public function getItems($itemParameter, $accreditation_template_id)
-	 {
-		 echo "pogi";
-	 }
+	   public function index($offset = 0)
+	   {
+	   	$this->hasPermissionRedirect('list-accreditation-template');
+	   	$model = new ParameterItemsModel();
+	   	 //kailangan ito para sa pagination
+	     $data['all_items'] = $model->getParameterItems(['status'=> 'a']);
+	     $data['offset'] = $offset;
+			 $accre_level_model = new AccreditationLevelsModel;
+			 $data['accreditation_levels'] = $accre_level_model->where(['status'=>'a'])->findAll();
 
-	//
-  //   public function index($offset = 0)
-  //   {
-  //   	$this->hasPermissionRedirect('list-accreditation-template');
-  //   	$model = new AccreditationTemplatesModel();
-  //   	 //kailangan ito para sa pagination
-  //      	$data['all_items'] = $model->getAccreditationTemplateWithCondition(['status'=> 'a']);
-  //      	$data['offset'] = $offset;
-	//
-  //       $data['ats'] = $model->getAccreditataionTemplateWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' =>  $offset]);
-	//
-  //       $data['function_title'] = "Accrediation Templates";
-  //       $data['viewName'] = 'Modules\Accreditation\Views\accreditation_templates\index';
-  //       echo view('App\Views\theme\index', $data);
-  //   }
-	//
-	// 	public function add_accreditation_template()
-  //   {
-  //   	$this->hasPermissionRedirect('add-accreditation-template');
-  //   	$permissions_model = new PermissionsModel();
-  //   	$data['permissions'] = $this->permissions;
-	//
-	// 		$accre_level_model = new AccreditationLevelsModel;
-	// 		$data['accreditation_levels'] = $accre_level_model->where(['status'=>'a'])->findAll();
-	//
-	//
-	// 		$area_model = new AreasModel;
-	// 		$data['areas'] = $area_model->where(['status'=>'a'])->findAll();
-	//
-	// 		$program_model = new ProgramsModel;
-	// 		$data['academic_programs'] = $program_model->where(['status'=>'a'])->findAll();
-	// 		// print_r($data['academic_programs']); die();
-	//
-	//
-  //   	helper(['form', 'url']);
-  //   	$model = new AccreditationTemplatesModel();
-	//
-  //   	if(!empty($_POST))
-  //   	{
-	//     	if (!$this->validate('accreditation_templates'))
-	// 	    {
-	// 	    		$data['errors'] = \Config\Services::validation()->getErrors();
-	// 	        $data['function_title'] = "Create New Accreditation Template";
-	// 	        $data['viewName'] = 'Modules\Accreditation\Views\accreditation_templates\frmAccreditationTemplate';
-	// 	        echo view('App\Views\theme\index', $data);
-	// 	    }
-	// 	    else
-	// 	    {
-	// 	        if($model->addAccreditationTemplate($_POST))
-	// 	        {
-	// 	        	$_SESSION['success'] = 'You have added a new record';
-	// 						$this->session->markAsFlashdata('success');
-	// 	        	return redirect()->to(base_url('accreditation-templates'));
-	// 	        }
-	// 	        else
-	// 	        {
-	// 	        	$_SESSION['error'] = 'You have an error in adding a new record';
-	// 						$this->session->markAsFlashdata('error');
-	// 	        	return redirect()->to(base_url('accreditation-templates'));
-	// 	        }
-	// 	    }
-  //   	}
-  //   	else
-  //   	{
-	// 			$data['function_title'] = "Create New Accreditation Template";
-	// 			$data['viewName'] = 'Modules\Accreditation\Views\accreditation_templates\frmAccreditationTemplate';
-	// 			echo view('App\Views\theme\index', $data);
-  //   	}
-  //   }
-	//
-  //  public function show_accreditation_template($id)
-	//  {
-	// 	$this->hasPermissionRedirect('show-accreditation-template');
-	// 	$data['permissions'] = $this->permissions;
-	//
-	// 	$parameter_item_model = new ParameterItemsModel();
-	// 	$parameter_section_model = new ParameterSectionsModel();
-	// 	$template_parameter_model = new TemplateParametersModel();
-	//
-	// 	$model = new AccreditationTemplatesModel();
-	// 	$data['parameter_items'] = $parameter_item_model->getParameterItemsWithAccreditationTemplateId(['accreditation_template_id'=>$id]);
-	// 	$data["item_parameters"] = $template_parameter_model->getDistictParametersInParameterItem($id);
-	//
-	// 	// print_r($data["item_parameters"]); die();
-	//
-	//
-	// 	$data['parameter_items_views'] = $parameter_item_model->getParameterItems(['accreditation_template_id'=>$id, 'template_parameter_id'=>$data["item_parameters"][0]['id']]);
-	// 	// print_r($data["parameter_items_views"]); die();
-	//
-	// 	$data['parameter_sections'] = $parameter_section_model->getParameterSections();
-	// 	$data['template_parameters'] = $template_parameter_model->getTemplateParameters();
-	// 	// print_r($data['parameter_items']); die();
-	// 	$data['accreditation_template'] = $model->getAccreditataionTemplateById($id);
-	// 	$data['function_title'] = "Accreditation Template Details";
-  //   $data['viewName'] = 'Modules\Accreditation\Views\accreditation_templates\accreditationTemplateDetails';
-  //   echo view('App\Views\theme\index', $data);
-	// }
-	//
-	//
-	//
-  //   public function edit_accreditation_template($id)
-  //   {
-  //   	$this->hasPermissionRedirect('edit-accreditation-template');
-	// 		$permissions_model = new PermissionsModel();
-  //   	$data['permissions'] = $this->permissions;
-	//
-	// 		$accre_level_model = new AccreditationLevelsModel;
-	// 		$data['accreditation_levels'] = $accre_level_model->where(['status'=>'a'])->findAll();
-	//
-	// 		$area_model = new AreasModel;
-	// 		$data['areas'] = $area_model->where(['status'=>'a'])->findAll();
-	//
-	// 		$program_model = new ProgramsModel;
-	// 		$data['academic_programs'] = $program_model->where(['status'=>'a'])->findAll();
-	//
-  //   	helper(['form', 'url']);
-  //   	$model = new AccreditationTemplatesModel();
-	// 		$data['rec'] = $model->find($id);
-	// 		// die("here");
-	//
-	// 		if(!empty($_POST))
-  //   	{
-	//     	if (!$this->validate('accreditation_templates'))
-	// 	    {
-	// 	    		$data['errors'] = \Config\Services::validation()->getErrors();
-	// 	        $data['function_title'] = "Modify Accreditation Template Details";
-	// 	        $data['viewName'] = 'Modules\Accreditation\Views\accreditation_templates\frmAccreditationTemplate';
-	// 	        echo view('App\Views\theme\index', $data);
-	// 	    }
-	// 	    else
-	// 	    {
-	// 	        if($model->editAccreditationTemplate($_POST, $id))
-	// 	        {
-	// 	        	$_SESSION['success'] = 'You have modified a record';
-	// 						$this->session->markAsFlashdata('success');
-	// 	        	return redirect()->to(base_url('accreditation-templates'));
-	// 	        }
-	// 	        else
-	// 	        {
-	// 	        	$_SESSION['error'] = 'You have an error in modifying a record';
-	// 						$this->session->markAsFlashdata('error');
-	// 	        	return redirect()->to(base_url('accreditation-templates'));
-	// 	        }
-	// 	    }
-  //   	}
-  //   	else
-  //   	{
-	// 			$data['function_title'] = "Modify Accreditation Template Details";
-	// 			$data['viewName'] = 'Modules\Accreditation\Views\accreditation_templates\frmAccreditationTemplate';
-	// 			echo view('App\Views\theme\index', $data);
-  //   	}
-  //   }
-	//
-  //   public function delete_accreditation_template($id)
-  //   {
-  //   	$this->hasPermissionRedirect('delete-accreditation-template');
-	//
-  //   	$model = new AccreditationTemplatesModel();
-  //   	$model->deleteAccreditationTemplate($id);
-  //   }
-	//
-	// 	public function add_parameter_item()
-	// 	{
-	// 		// wala pang permissions ito
-	// 		helper(['form', 'url']);
-	// 		if(!empty($_POST))
-  //   	{
-	// 			if (!$this->validate('addParameterItem'))
-	// 			{
-	// 				$data['errors'] = \Config\Services::validation()->getErrors();
-	// 				return $data['errors'];
-	// 			}
-	// 			else
-	// 			{
-	// 				$parent_item = 0;
-	//
-	// 				if(!empty(isset($_POST['parent_parameter_item_id'])))
-	// 				{
-	// 					$parent_item = $_POST['parent_parameter_item_id'];
-	// 				}
-	//
-	// 				$data = [
-	// 					'parameter_item' => $_POST['parameter_item'],
-	// 					'description' => $_POST['description'],
-	// 					'document_needed_list' => $_POST['document_needed_list'],
-	// 					'template_parameter_id' => intval($_POST['template_parameter_id']),
-	// 					'parameter_section_id' => intval($_POST['parameter_section_id']),
-	// 					'parent_parameter_item_id' => $parent_item,
-	// 					'tagged_documents' => null,
-	// 					'accreditation_template_id' => intval($_POST['accreditation_template_id'])
-	// 				];
-	//
-	// 				$parameter_item_model = new ParameterItemsModel();
-	// 				return json_encode($parameter_item_model->addParameterItem($data));
-	// 			 	// if($parameter_item_model->addParameterItem($data))
-	// 				// {
-	// 				// 	return json_encode(true);
-	// 				// }
-	// 				// else
-	// 				// {
-	// 				// 	return json_encode(false);
-	// 				// }
-	// 			}
-	// 		}
-	// 	}
-}
+			 $area_model = new AreasModel;
+			 $data['areas'] = $area_model->where(['status'=>'a'])->findAll();
+
+			 $document_type = new DocumentTypesModel;
+			 $data['document_types'] = $document_type->where(['status' => 'a'])->findAll();
+
+			 $parameter_section_model = new ParameterSectionsModel;
+			 $data['parameter_sections'] = $parameter_section_model->where(['status' => 'a'])->findAll();
+			 $document_model = new AcademicDocumentsModel;
+			 $data['documents'] = $document_model->getAcademicDocumentWithFunction(['status'=> 'a', 'limit' => PERPAGE, 'offset' => $offset]);
+			 // echo "<pre>";
+			 // print_r($data['documents']);
+			 // die();
+			 $program_model = new ProgramsModel;
+			 $data['academic_programs'] = $program_model->where(['status'=>'a'])->findAll();
+			 if ($_GET) {
+						 $data['rec'] = $_GET;
+  					 $data['ats'] = $model->getAccreditataionTemplateWithFunction(['status'=> 'a'], $_GET);
+			 }
+			 else {
+				 $data['ats'] = null;
+			 }
+			 // echo "<pre>";
+			 // print_r($data['ats']);
+			 // die();
+			 $template_parameter_model = new TemplateParametersModel;
+			 $data["item_parameters"] = $template_parameter_model->getDistictParametersInParameterItem($data['ats'][0]['parameter_section_id']);
+	     $data['function_title'] = "Parameter Item";
+	     $data['viewName'] = 'Modules\Accreditation\Views\parameter_items\index';
+	     echo view('App\Views\theme\index', $data);
+	   }
+
+		 public function tag_documents(){
+			 // echo "<pre>";
+			 // print_r($_POST['documents']);
+			 // die();
+			 $model = new ParameterItemsModel();
+			 if (isset($_POST['documents'])) {
+				 $str = '[';
+  			 foreach ($_POST['documents'] as $index => $value) {
+  			 	$str .= $value.',';
+  			 }
+  			 $str = rtrim($str, ',');
+  			 $str .= ']';
+  			 $isTagged = 0;
+			 }
+
+			 if ($model->tagDocuments($_POST['parameter_id'], $str)) {
+			 	$isTagged = 1;
+			 }
+			 if($isTagged == 1)
+			 {
+	 	 	 	 $_SESSION['success'] = 'You have tagged the documents';
+	 			 $this->session->markAsFlashdata('success');
+				 return redirect()->to(base_url('parameter-items'));
+	 		 }
+			 else
+			 {
+				$_SESSION['error'] = 'You have an error in tagging the documents';
+				$this->session->markAsFlashdata('error');
+				return redirect()->to(base_url('parameter-items'));
+			 }
+		 }
+
+		 public function displayItems($itemParameter, $accreditation_template_id){
+			$model = new ParameterItemsModel();
+			$data['all_items'] = $model->getParameterItems(['status'=> 'a']);
+ 			$accre_level_model = new AccreditationLevelsModel;
+ 			$data['accreditation_levels'] = $accre_level_model->where(['status'=>'a'])->findAll();
+
+ 			$area_model = new AreasModel;
+ 			$data['areas'] = $area_model->where(['status'=>'a'])->findAll();
+
+ 			$document_type = new DocumentTypesModel;
+ 			$data['document_types'] = $document_type->where(['status' => 'a'])->findAll();
+
+ 			$parameter_section_model = new ParameterSectionsModel;
+ 			$data['parameter_sections'] = $parameter_section_model->where(['status' => 'a'])->findAll();
+ 			$document_model = new AcademicDocumentsModel;
+ 			$data['documents'] = $document_model->where(['status'=>'a'])->findAll();
+			$data['ats'] = $model->getAccreditataionTemplateWithFunction(['status'=> 'a','template_parameter_id' =>$itemParameter ,'accreditation_template_id' => $accreditation_template_id]);
+ 			// echo "<pre>";
+ 			// print_r($data['documents']);
+ 			// die();
+ 			// $program_model = new ProgramsModel;
+			echo view('Modules\Accreditation\Views\parameter_items\paramterItemsTable', $data);
+		 }
+ }

@@ -22,6 +22,7 @@ class TemplateParametersModel extends \CodeIgniter\Model
       $str .= "FROM parameter_items b ";
       $str .= "INNER JOIN template_parameters a ON b.template_parameter_id = a.id ";
       $str .=" WHERE b.accreditation_template_id = '".$accreditation_template_id."'";
+      $str .=" ORDER BY a.parameter_code ASC";
       // print_r($str); die();
     	$query = $db->query($str);
       return $query->getResultArray();

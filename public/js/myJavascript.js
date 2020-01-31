@@ -1,16 +1,17 @@
-function parameterItems(itemParameter, accreditation_template_id)
+function displayMSI(itemParameter, accreditation_template_id)
 {
 	event.preventDefault();
-
+	alert('http://localhost/damas/msi/displayItems/' + itemParameter + '/' + accreditation_template_id);
 	// alert('parameter_id = '+ itemParameter);
 	// alert('accreditation_template_id = '+ accreditation_template_id);
 	$.ajax({
 		type: "GET",
-		url: 'http://localhost/damas/accreditation-templates/show/1',
+		url: 'http://localhost/damas/msi/displayItems/' + itemParameter + '/' + accreditation_template_id,
 		dataType : "HTML",
 		success: function(data)
 		{
-			alert(data);
+			// alert(data);
+			$('#parameterTable').html(data);
 			// $('#indicators-table .tbody').
 		},
 		error: function(req, status, err)

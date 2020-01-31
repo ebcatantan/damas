@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?= base_url() ?>public/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>public/font-awesome/css/all.css">
+    <link rel="stylesheet" href="<?= base_url() ?>public/css/select2.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>public/css/select2-bootstrap4.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>public/css/style.css">
     <title><?= SYSTEM_TITLE ?></title>
   </head>

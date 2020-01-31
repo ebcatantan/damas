@@ -25,6 +25,7 @@
     <script src="<?= base_url() ?>public/js/bootstrap.min.js"></script>
     <script src="<?= base_url() ?>public/js/sweetalert2@9.js"></script>
     <script src="<?= base_url() ?>public/js/myAlerts.js"></script>
+    <script src="<?= base_url() ?>public/js/select2.full.min.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>public/js/myJavascript.js"></script>
     <script src="<?= base_url() ?>public/js/user_profile.js"></script>
     <script>
@@ -91,6 +92,10 @@
              return false;
          });
        });
+
+      $('.document-tagging').select2({
+       theme: 'bootstrap4'
+      });
     </script>
   </body>
 </html>
