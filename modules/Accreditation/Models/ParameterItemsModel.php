@@ -44,6 +44,7 @@ class ParameterItemsModel extends \CodeIgniter\Model
   	{
   		$val_array['created_at'] = (new \DateTime())->format('Y-m-d H:i:s');
   		$val_array['status'] = 'a';
+      // return $val_array;
 
       return $this->save($val_array);
   	}

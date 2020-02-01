@@ -38,10 +38,10 @@ function parameterItems(itemParameter, accreditation_template_id)
 // 		},
 // 	});
 // }
-function getAllDocuments(parameter_item_id, accre_id)
+function getAllDocuments(parameter_item_id, accre_id, arrtagged_documents)
 {
   $('#documentListForTagging').modal('show');
-
+	$('#academic_document_ids').val(arrtagged_documents).change();
 	$('#btnTagging').on('click', function(event){
 		event.preventDefault();
 		var id = parameter_item_id;

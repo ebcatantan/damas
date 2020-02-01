@@ -89,7 +89,7 @@
                     <?php getdocuments($indicators['tagged_documents'], $documents) ?>
                   <?php endif; ?>
                   <br>
-                  <button onClick= "getAllDocuments(<?=$indicators['id']?>,<?= $indicators['accreditation_template_id'] ?>)" class="btn btn-info btn-sm">
+                  <button onClick= "getAllDocuments(<?=$indicators['id']?>,<?= $indicators['accreditation_template_id'] ?>, <?= $indicators['tagged_documents'] ?>)" class="btn btn-info btn-sm">
                     <i class="fas fa-tags"></i> Tag Document(s)
                   </button>
                 </td>

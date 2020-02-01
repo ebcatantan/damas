@@ -56,31 +56,97 @@ class CreateAreas extends \CodeIgniter\Database\Migration {
                                 'comment'        => 'Date of soft deletion',
                         ]
                 ]);
-                
+
                 $this->forge->addKey('id', TRUE);
                 $this->forge->createTable($this->table);
 
                 $data = [
                     [
-                        'area_code' => 'area 1',
-                        'area_name' => 'research',
-                        'description' => 'research area',
+                      'id'  => 1,
+                        'area_code' => 'area i',
+                        'area_name' => 'VISION, MISSION, GOALS AND OBJECTIVES',
+                        'description' => 'VISION, MISSION, GOALS AND OBJECTIVES',
                         'area_head_id' => 1,
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                      'area_code' => 'area 2',
-                      'area_name' => 'curriculum and instruction',
-                      'description' => 'curriculum and instruction',
+                      'id'  => 2,
+                      'area_code' => 'area ii',
+                      'area_name' => 'FACULTY',
+                      'description' => 'FACULTY',
                       'area_head_id' => 1,
                       'status' => 'a',
                       'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                      'area_code' => 'area 3',
-                      'area_name' => 'extension programs',
-                      'description' => 'extension programs',
+                      'id'  => 3,
+                      'area_code' => 'area iii',
+                      'area_name' => 'CURRICULUM AND INSTRUCTION',
+                      'description' => 'CURRICULUM AND INSTRUCTION',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'id'  => 4,
+                      'area_code' => 'area iv',
+                      'area_name' => 'SUPPORT TO STUDENTS',
+                      'description' => 'SUPPORT TO STUDENTS',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'id'  => 5,
+                      'area_code' => 'area v',
+                      'area_name' => 'RESEARCH',
+                      'description' => 'RESEARCH',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'id'  => 6,
+                      'area_code' => 'area vi',
+                      'area_name' => 'EXTENSION AND COMMUNITY INVOLVEMENT',
+                      'description' => 'EXTENSION AND COMMUNITY INVOLVEMENT',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'id'  => 7,
+                      'area_code' => 'area vii',
+                      'area_name' => 'LIBRARY',
+                      'description' => 'LIBRARY',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'id'  => 8,
+                      'area_code' => 'area viii',
+                      'area_name' => 'PHYSICAL PLANT AND FACILITIES',
+                      'description' => 'PHYSICAL PLANT AND FACILITIES',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'id'  => 9,
+                      'area_code' => 'area ix',
+                      'area_name' => 'PHYSICAL PLANT AND FACILITIES',
+                      'description' => 'PHYSICAL PLANT AND FACILITIES',
+                      'area_head_id' => 1,
+                      'status' => 'a',
+                      'created_at' => date('Y-m-d H:i:s')
+                    ],
+                    [
+                      'id'  => 10,
+                      'area_code' => 'area x',
+                      'area_name' => 'ADMINISTRATION',
+                      'description' => 'ADMINISTRATION',
                       'area_head_id' => 1,
                       'status' => 'a',
                       'created_at' => date('Y-m-d H:i:s')

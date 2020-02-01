@@ -54,6 +54,7 @@ class CreatePrograms extends \CodeIgniter\Database\Migration {
 
                 $data = [
                     [
+                        'id'  => 1,
                         'program_name' => 'bsit',
                         'description' => 'bachelor of science in information technology',
                         'program_head_id' => 1,
@@ -61,6 +62,7 @@ class CreatePrograms extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
+                        'id'  => 2,
                         'program_name' => 'bsece',
                         'description' => 'bachelor of science in electronic and communications engineering',
                         'program_head_id' => 1,
@@ -68,6 +70,7 @@ class CreatePrograms extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
+                        'id'  => 3,
                         'program_name' => 'bsme',
                         'description' => 'bachelor of science in mechanical engineering',
                         'program_head_id' => 1,
@@ -75,6 +78,7 @@ class CreatePrograms extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
+                        'id'  => 4,
                         'program_name' => 'bsa',
                         'description' => 'bachelor of science in accountancy',
                         'program_head_id' => 1,
@@ -82,20 +86,15 @@ class CreatePrograms extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'program_name' => 'bsba-mm',
-                        'description' => 'bachelor of science in business administration major in marketing management',
+                        'id'  => 5,
+                        'program_name' => 'business management',
+                        'description' => 'business management',
                         'program_head_id' => 1,
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                      'program_name' => 'bsba-hr',
-                      'description' => 'bachelor of science in business administration major in human resources',
-                        'program_head_id' => 1,
-                        'status' => 'a',
-                        'created_at' => date('Y-m-d H:i:s')
-                    ],
-                    [
+                        'id'  => 6,
                         'program_name' => 'bsoa',
                         'description' => 'bachelor of science in office administration major in legal transcription',
                         'program_head_id' => 1,
@@ -103,6 +102,7 @@ class CreatePrograms extends \CodeIgniter\Database\Migration {
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
+                        'id'  => 7,
                         'program_name' => 'bsed-math',
                         'description' => 'bachelor of science in education major in mathematics',
                         'program_head_id' => 1,

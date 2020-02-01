@@ -109,9 +109,18 @@ class AccreditationTemplates extends BaseController
 
 		// print_r($data["item_parameters"]); die();
 
+		if(!isset($data["item_parameters"][0]['id']))
+		{
+			$data['parameter_items_views'] = $parameter_item_model->getParameterItems(['accreditation_template_id'=>$id, 'template_parameter_id'=>0]);
+			$data['parameterName'] = $template_parameter_model->find(0);
+		}
+		else
+		{
+			$data['parameter_items_views'] = $parameter_item_model->getParameterItems(['accreditation_template_id'=>$id, 'template_parameter_id'=>$data["item_parameters"][0]['id']]);
+			$data['parameterName'] = $template_parameter_model->find($data["item_parameters"][0]['id']);
+		}
 
-		$data['parameter_items_views'] = $parameter_item_model->getParameterItems(['accreditation_template_id'=>$id, 'template_parameter_id'=>$data["item_parameters"][0]['id']]);
-		$data['parameterName'] = $template_parameter_model->find($data["item_parameters"][0]['id']);
+
 		 // print_r($template_parameter_model->getLastQuery()); die();
 
 		 $model_documents = new AcademicDocumentsModel();
@@ -190,7 +199,6 @@ class AccreditationTemplates extends BaseController
 
 		public function add_parameter_item()
 		{
-			// wala pang permissions ito
 			helper(['form', 'url']);
 			if(!empty($_POST))
     	{
@@ -218,7 +226,7 @@ class AccreditationTemplates extends BaseController
 						'tagged_documents' => null,
 						'accreditation_template_id' => intval($_POST['accreditation_template_id'])
 					];
-
+					// return json_encode(true);
 					$parameter_item_model = new ParameterItemsModel();
 					return json_encode($parameter_item_model->addParameterItem($data));
 				 	// if($parameter_item_model->addParameterItem($data))

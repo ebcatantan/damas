@@ -50,18 +50,21 @@ class CreateParameterSections extends \CodeIgniter\Database\Migration {
 
                 $data = [
                     [
+                        'id' => 1,
                         'parameter_section_name' => 'system - inputs and processes',
                         'description' => 'system - inputs and processes',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
+                        'id' => 2,
                         'parameter_section_name' => 'implimentation',
                         'description' => 'implimentation',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
+                        'id' => 3,
                         'parameter_section_name' => 'outcome/s',
                         'description' => 'outcome/s',
                         'status' => 'a',
