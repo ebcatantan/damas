@@ -24,7 +24,7 @@
             <td><?= ucwords($permission['function_name']) ?></td>
             <td>
               <?php foreach($roles as $role): ?>
-                <?php 
+                <?php
                   $allowed_roles = substr($permission['allowed_roles'], 0, -1);
                   $allowed_roles = ltrim($allowed_roles, '[');
                   $finalAllowed = explode(',',$allowed_roles);
@@ -39,7 +39,6 @@
                   echo ' '.$role['role_name'];
                 ?>
               <?php endforeach; ?>
-              
             </td>
           </tr>
         <?php endif; ?>
@@ -47,4 +46,3 @@
       </tbody>
     </table>
 <?php endforeach; ?>
- 

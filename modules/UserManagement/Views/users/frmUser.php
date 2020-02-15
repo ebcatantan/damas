@@ -17,7 +17,7 @@
             <input name="firstname" type="text" value="<?= isset($rec['firstname']) ? $rec['firstname'] : set_value('firstname') ?>" class="form-control <?= isset($errors['firstname']) ? 'is-invalid':'is-valid' ?>" id="firstname" placeholder="Firstname">
               <?php if(isset($errors['firstname'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['firstname']) ?>
+                  <?= $errors['firstname'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -28,7 +28,7 @@
             <input name="lastname" type="text" value="<?= isset($rec['lastname']) ? $rec['lastname'] : set_value('lastname') ?>" class="form-control <?= isset($errors['lastname']) ? 'is-invalid':'is-valid' ?>" id="lastname" placeholder="Lastname">
               <?php if(isset($errors['lastname'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['lastname']) ?>
+                  <?= $errors['lastname'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -41,7 +41,7 @@
             <input name="username" type="text" value="<?= isset($rec['username']) ? $rec['username'] : set_value('username') ?>" class="form-control <?= isset($errors['username']) ? 'is-invalid':'is-valid' ?>" id="username" placeholder="Username">
               <?php if(isset($errors['username'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['username']) ?>
+                  <?= $errors['username'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -52,7 +52,7 @@
             <input name="email" type="email" value="<?= isset($rec['email']) ? $rec['email'] : set_value('email') ?>" class="form-control <?= isset($errors['email']) ? 'is-invalid':'is-valid' ?>" id="email" placeholder="Email">
               <?php if(isset($errors['email'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['email']) ?>
+                  <?= $errors['email'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -65,7 +65,7 @@
             <input name="password" type="password" value="<?= isset($rec['password']) ? '': set_value('password') ?>" class="form-control <?= isset($errors['password']) ? 'is-invalid':'is-valid' ?>" id="password" placeholder="Password">
               <?php if(isset($errors['password'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['password']) ?>
+                  <?= $errors['password'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -76,7 +76,7 @@
             <input name="password_retype" type="password" value="<?= isset($rec['password']) ? '' : set_value('password_retype') ?>" class="form-control <?= isset($errors['password_retype']) ? 'is-invalid':'is-valid' ?>" id="password_retype" placeholder="Password Re-type">
               <?php if(isset($errors['password_retype'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['password_retype']) ?>
+                  <?= $errors['password_retype'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -89,7 +89,7 @@
             <input name="birthdate" type="date" value="<?= isset($rec['birthdate']) ? $rec['birthdate'] : set_value('birthdate') ?>" class="form-control <?= isset($errors['birthdate']) ? 'is-invalid':'is-valid' ?>" id="birthdate" placeholder="Birthdate">
               <?php if(isset($errors['birthdate'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['birthdate']) ?>
+                  <?= $errors['birthdate'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -109,7 +109,7 @@
           </select>
            <?php if(isset($errors['role_id'])): ?>
               <div class="invalid-feedback">
-                <?= isset($errors['role_id']) ?>
+                <?= $errors['role_id'] ?>
               </div>
             <?php endif; ?>
         </div>

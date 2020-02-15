@@ -79,7 +79,7 @@
         <form method="post" id="user_credential_form">
           <div class="form-group">
             <label for="area_id">Area</label>
-            <select name="area_id" id="area_id" class="form-control <?= $errors['area_id'] ? 'is-invalid':'is-valid' ?>">
+            <select name="area_id" id="area_id" class="form-control <?= isset($errors['area_id']) ? 'is-invalid':'is-valid' ?>">
               <?php if(isset($user_detail['area_id'])): ?>
                 <option value="<?= $user_detail['area_id'] ?>"><?= strtoupper(name_on_system($user_detail['area_id'], $areas, 'areas')) ?></option>
               <?php else: ?>
@@ -91,7 +91,7 @@
                 <?php endforeach; ?>
               <?php endif; ?>
             </select>
-             <?php if($errors['area_id']): ?>
+             <?php if(isset($errors['area_id'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['area_id'] ?>
                 </div>
@@ -99,7 +99,7 @@
           </div>
           <div class="form-group">
             <label for="department_id">Department</label>
-            <select name="department_id" id="department_id" class="form-control <?= $errors['department_id'] ? 'is-invalid':'is-valid' ?>">
+            <select name="department_id" id="department_id" class="form-control <?= isset($errors['department_id']) ? 'is-invalid':'is-valid' ?>">
               <?php if(isset($user_detail['department_id'])): ?>
                 <option value="<?= $user_detail['department_id'] ?>"><?= strtoupper(name_on_system($user_detail['department_id'], $departments, 'departments')) ?></option>
               <?php else: ?>
@@ -111,7 +111,7 @@
                 <?php endforeach; ?>
               <?php endif; ?>
             </select>
-             <?php if($errors['department_id']): ?>
+             <?php if(isset($errors['department_id'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['department_id'] ?>
                 </div>
@@ -119,7 +119,7 @@
           </div>
           <div class="form-group">
             <label for="academic_program_id">Academic Program</label>
-            <select name="academic_program_id" id="academic_program_id" class="form-control <?= $errors['academic_program_id'] ? 'is-invalid':'is-valid' ?>">
+            <select name="academic_program_id" id="academic_program_id" class="form-control <?= isset($errors['academic_program_id']) ? 'is-invalid':'is-valid' ?>">
               <?php if(isset($user_detail['academic_program_id'])): ?>
                 <option value="<?= $user_detail['academic_program_id'] ?>"><?= strtoupper(name_on_system($user_detail['academic_program_id'], $academic_programs, 'academic_programs')) ?></option>
               <?php else: ?>
@@ -131,7 +131,7 @@
                 <?php endforeach; ?>
               <?php endif; ?>
             </select>
-             <?php if($errors['academic_program_id']): ?>
+             <?php if(isset($errors['academic_program_id'])): ?>
                 <div class="invalid-feedback">
                   <?= $errors['academic_program_id'] ?>
                 </div>

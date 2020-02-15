@@ -144,7 +144,7 @@ class Validation
     public $document_type = [
         'document_type_code' => [
             'label'  => 'Document Type Code',
-            'rules'  => 'required|alpha_numeric',
+            'rules'  => 'required|alpha_numeric_space',
             'errors' => [
                 'required' => 'Document Type Code field is required.'
             ]

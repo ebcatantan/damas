@@ -51,6 +51,6 @@
 
 <div class="row">
   <div class="col-md-6 offset-md-6">
-    <?php paginater('document_types', count($all_items), PERPAGE, $offset) ?>
+    <?php paginater('academic-documents', count($all_items), PERPAGE, $offset) ?>
   </div>
 </div>

@@ -10,7 +10,6 @@ if (! function_exists('hasPrimary'))
 				return true;
 			}
 		}
-
 		return false;
 	}
 }
@@ -69,7 +68,7 @@ if (! function_exists('user_add_link'))
 				switch($table)
 				{
 					case 'parameter_items':
-						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#frmParameterItems"><i class="fas fa-plus"></i> Add Parameter</button>';
+						echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#frmParameterItems"><i class="fas fa-plus"></i> Add Parameter Items</button>';
 						break;
 					default:
 						echo  '<a href="'. base_url() .''.str_replace("_","-",$table).'/add" class="btn btn-sm btn-primary btn-block float-right"><i class="fas fa-plus"></i> Add '.ucwords(str_replace('_', ' ', $table)) .'</a>';

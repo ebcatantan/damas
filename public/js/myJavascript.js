@@ -2,8 +2,7 @@ function parameterItems(itemParameter, accreditation_template_id)
 {
 	event.preventDefault();
 	var url =  baseURL + 'parameter-items/get-items/' + itemParameter + '/' + accreditation_template_id;
-	// alert(url);
-	// alert('accreditation_template_id = '+ accreditation_template_id);
+
 	$.ajax({
 		type: "GET",
 		url: url,
@@ -11,6 +10,55 @@ function parameterItems(itemParameter, accreditation_template_id)
 		success: function(data)
 		{
 			$('#indicators').html(data);
+		},
+		error: function(req, status, err)
+		{
+			alert('Something Went Wrong', status, err);
+		},
+	});
+	return false;
+}
+
+function displayMSI(itemParameter, accreditation_template_id)
+{
+	event.preventDefault();
+	var url =  baseURL + 'parameter-items/get-items/' + itemParameter + '/' + accreditation_template_id;
+
+	$.ajax({
+		type: "GET",
+		url: url,
+		dataType : "HTML",
+		success: function(data)
+		{
+			$('#indicators').html(data);
+
+			$('#parameterTable').html(data);
+			// $('#indicators-table .tbody').
+		},
+		error: function(req, status, err)
+		{
+			alert('Something Went Wrong', status, err);
+		},
+	});
+	return false;
+}
+
+function msiTest(itemParameter, accreditation_template_id)
+{
+	//alert("clicked");
+	event.preventDefault();
+	var url =  baseURL + 'msi/displayItems/' + itemParameter + '/' + accreditation_template_id;
+
+	$.ajax({
+		type: "GET",
+		url: url,
+		dataType : "HTML",
+		success: function(data)
+		{
+			// $('#indicators').ht	ml(data);
+
+			$('#parameterTable').html(data);
+			// $('#indicators-table .tbody').
 		},
 		error: function(req, status, err)
 		{

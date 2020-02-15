@@ -12,9 +12,31 @@
     <tbody>
       <?php if(isset($parameter_items_views)): ?>
         <?php foreach ($parameter_items_views as $indicators): ?>
-          <tr class="text-center">
+          <tr>
             <td scope="col"><?= ucwords($indicators['parameter_item']) ?></td>
-            <td scope="col"><?= ucwords($indicators['document_needed_list'])?></td>
+            <?php
+            if(!empty($indicators['document_needed_list'])){
+              $arr_doc_list = explode('-', $indicators['document_needed_list']);
+            }
+            else {
+                $arr_doc_list = [];
+              }
+            ?>
+            <td scope="col">
+              <ul>
+              <?php
+                $cnt = 1;
+                foreach ($arr_doc_list as $doc) {
+                  if($cnt == 1)
+                  {
+                    $cnt++;
+                    continue;
+                  }
+                  echo "<li align='left'>".ucwords($doc)."</li>";
+                }
+              ?>
+            </ul>
+            </td>
             <td scope="col">
               <!-- <button id="document_tagging" data-parameterItem="<?= $indicators['id'] ?>" data-toggle="modal" data-target="#documentListForTagging" class="btn btn-info btn-sm"> -->
               <?php if (empty($indicators['tagged_documents'])): ?>
@@ -23,9 +45,11 @@
                 <?php getdocuments($indicators['tagged_documents'], $documents) ?>
               <?php endif; ?>
               <br>
-              <button onClick= "getAllDocuments(<?=$indicators['id']?>,<?= $indicators['accreditation_template_id'] ?>, <?= $indicators['tagged_documents'] ?>)" class="btn btn-info btn-sm">
-                <i class="fas fa-tags"></i> Tag Document(s)
-              </button>
+              <?php if (!empty($indicators['document_needed_list'])): ?>
+                <button onClick= "getAllDocuments(<?=$indicators['id']?>,<?= $indicators['accreditation_template_id'] ?>, <?= $indicators['tagged_documents'] ?>)" class="btn btn-info btn-sm">
+                  <i class="fas fa-tags"></i> Tag Document(s)
+                </button>
+              <?php endif; ?>
             </td>
             <td scope="col">Action</td>
           </tr>

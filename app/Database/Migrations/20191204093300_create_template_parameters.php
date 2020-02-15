@@ -502,6 +502,14 @@ class CreateTemplateParameters extends \CodeIgniter\Database\Migration {
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
+                    [
+                        'id'  => 57,
+                        'parameter_code' => 'parameter C',
+                        'title' => 'Funding and Other Resources',
+                        'description' => 'Funding and Other Resources',
+                        'status' => 'a',
+                        'created_at' => date('Y-m-d H:i:s')
+                    ],
                 ];
                 $db      = \Config\Database::connect();
                 $builder = $db->table($this->table);

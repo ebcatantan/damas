@@ -28,7 +28,7 @@
             <input name="doc_name" type="text" value="<?= isset($rec['doc_name']) ? $rec['doc_name'] : set_value('doc_name') ?>" class="form-control <?= isset($errors['doc_name']) ? 'is-invalid':'is-valid' ?>" id="doc_name" placeholder="Document Name">
               <?php if(isset($errors['doc_name'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['doc_name']) ?>
+                  <?= $errors['doc_name'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -41,7 +41,7 @@
             <input name="doc_attachment" type="file" value="<?= isset($rec['doc_attachment']) ? $rec['doc_attachment'] : set_value('doc_attachment') ?>" class="form-control <?= isset($errors['doc_attachment']) ? 'is-invalid':'is-valid' ?>" id="doc_attachment" placeholder="File Attachment">
               <?php if(isset($errors['doc_attachment'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['doc_attachment']) ?>
+                  <?= $errors['doc_attachment'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -64,7 +64,7 @@
             </select>
              <?php if(isset($errors['document_type_id'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['document_type_id']) ?>
+                  <?= $errors['document_type_id'] ?>
                 </div>
               <?php endif; ?>
           </div>
@@ -77,7 +77,7 @@
             <textarea name="description" type="text" class="form-control <?= isset($errors['description']) ? 'is-invalid':'is-valid'  ?>" id="description" placeholder="Document Description" rows="5"><?= isset($rec['description']) ? $rec['description'] : set_value('description') ?></textarea>
             <?php if(isset($errors['description'])): ?>
                 <div class="invalid-feedback">
-                  <?= isset($errors['description']) ?>
+                  <?= $errors['description'] ?>
                 </div>
               <?php endif; ?>
           </div>

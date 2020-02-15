@@ -11,6 +11,15 @@ $routes->group('accreditation-templates', ['namespace' => 'Modules\Accreditation
     $routes->match(['get', 'post'], 'add-parameter-item', 'AccreditationTemplates::add_parameter_item');
 });
 
+$routes->group('msi', ['namespace' => 'Modules\Accreditation\Controllers'], function($routes)
+{
+  $routes->get('get-items/(:num)/(:num)', 'ParameterItems::getItems/$1/$2');
+  $routes->match(['get', 'post'], 'tagdocuments', 'ParameterItems::tagdocuments');
+  $routes->match(['get', 'post'], '/', 'msi::index');
+  $routes->match(['get', 'post'], '(:num)', 'msi::index/$1');
+  $routes->match(['get', 'post'], 'tag', 'msi::tag_documents');
+  $routes->match(['get', 'post'], 'displayItems/(:num)/(:num)', 'msi::displayItems/$1/$2');
+});
 $routes->group('parameter-items', ['namespace' => 'Modules\Accreditation\Controllers'], function($routes)
 {
   $routes->get('get-items/(:num)/(:num)', 'ParameterItems::getItems/$1/$2');

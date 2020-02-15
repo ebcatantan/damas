@@ -51,42 +51,36 @@ class CreateAccreditationLevels extends \CodeIgniter\Database\Migration {
 
                 $data = [
                     [
-                        'id'  => 1,
                         'accreditation_level' => 'preliminary visit',
                         'description' => 'preliminary visit',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id'  => 2,
                         'accreditation_level' => 'level 1',
                         'description' => 'level 1',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id'  => 3,
                         'accreditation_level' => 'level 2',
                         'description' => 'level 2',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id'  => 4,
                         'accreditation_level' => 'level 3',
                         'description' => 'level 3',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id'  => 5,
                         'accreditation_level' => 'level 4',
                         'description' => 'level 4',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
                     [
-                        'id'  => 6,
                         'accreditation_level' => 'level 5',
                         'description' => 'level 5',
                         'status' => 'a',

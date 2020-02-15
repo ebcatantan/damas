@@ -63,7 +63,8 @@ class DocumentTypes extends BaseController
 		    {
 		    	$data['errors'] = \Config\Services::validation()->getErrors();
 		        $data['function_title'] = "Adding Document Type";
-		        $data['viewName'] = 'Modules\Dcuments\Views\document_type\frmDocumentType';
+		        $data['viewName'] = 'Modules\Documents\Views\document_types\frmDocumentType';
+						// die("here");
 		        echo view('App\Views\theme\index', $data);
 		    }
 		    else
