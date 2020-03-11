@@ -33,6 +33,9 @@ class ParameterItems extends BaseController
 		 $model = new ParameterItemsModel();
 		 $data['parameter_items_views'] = $model->getParameterItems(['template_parameter_id'=>$itemParameter, 'accreditation_template_id'=>$accreditation_template_id]);
 
+		 $parameter_section_model = new ParameterSectionsModel();
+		 $data['parameter_sections'] = $parameter_section_model->where(['status' => 'a'])->findAll();
+
 		 $template_parameter_model = new TemplateParametersModel();
 		 $data['parameterName'] = $template_parameter_model->find($itemParameter);
 

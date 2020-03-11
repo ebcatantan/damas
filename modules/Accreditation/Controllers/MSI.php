@@ -66,7 +66,7 @@ class MSI extends BaseController
 			 // echo "<pre>";
 			 // print_r($data['item_parameters']);
 			 // die();
-	     $data['function_title'] = "Parameter Item";
+	     $data['function_title'] = "Parameter Item/Indicators";
 	     $data['viewName'] = 'Modules\Accreditation\Views\parameter_items\index';
 	     echo view('App\Views\theme\index', $data);
 	   }

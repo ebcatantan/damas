@@ -16,6 +16,7 @@
         </div>
       </div>
     </div>
+    <?php echo view('Modules\Accreditation\Views\parameter_items\frmDocumentListForTagging'); ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -100,6 +101,10 @@
              return false;
          });
        });
+
+      $('.js-example-basic-multiple').select2({
+       theme: 'bootstrap4'
+      });
 
       $('.document-tagging').select2({
        theme: 'bootstrap4'

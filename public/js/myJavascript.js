@@ -106,7 +106,7 @@ function getAllDocuments(parameter_item_id, accre_id, arrtagged_documents)
 					alert("Success in Adding Indecator / Parameter Item.");
 					$('#academic_document_ids').select2('val', '');
 					$('#documentListForTagging').modal('hide');
-          window.location.replace(baseURL + "/accreditation-templates/show/"+accretemplate_id);
+          window.location.replace(baseURL + "accreditation-templates/show/"+accretemplate_id);
       },
 			error: function(req, status, err)
 			{

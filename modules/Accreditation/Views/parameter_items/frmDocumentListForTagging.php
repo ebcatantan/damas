@@ -13,9 +13,11 @@
                 <div class="form-group">
                   <!-- <input type="hidden" name="parameter_item_id" value="" id="parameter_item_id"> -->
                   <select class="js-example-basic-multiple form-control" style="width: 100%" id="academic_document_ids" name="academic_document_ids[]" multiple="multiple">
+                    <?php if(isset($documents)): ?>
                     <?php foreach($documents as $document): ?>
-                    <option value="<?=$document['id']?>"><?=strtoupper($document['doc_name'])?></option>
-                  <?php endforeach; ?>
+                      <option value="<?=$document['id']?>"><?=strtoupper($document['doc_name'])?></option>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
                   </select>
                 </div>
             <!-- </div>

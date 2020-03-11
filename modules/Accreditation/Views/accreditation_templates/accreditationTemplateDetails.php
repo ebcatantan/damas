@@ -76,6 +76,10 @@
           </tr>
         </thead>
         <tbody>
+        <?php foreach ($parameter_sections as $parameter_section): ?>
+            <tr  class="table-dark">
+              <th colspan="9"><?=strtoupper($parameter_section['parameter_section_name'])?></th>
+            </tr>
           <?php if(isset($parameter_items_views)): ?>
             <?php foreach ($parameter_items_views as $indicators): ?>
               <tr>
@@ -117,11 +121,12 @@
               </tr>
             <?php endforeach; ?>
           <?php endif; ?>
+          <?php endforeach; ?>
         </tbody>
       </table>
     </div>
   </div>
 </div>
 <?php  echo view('Modules\Accreditation\Views\parameter_items\frmParameterItemModal'); ?>
-<?php  echo view('Modules\Accreditation\Views\parameter_items\frmDocumentListForTagging'); ?>
+<?php  //echo view('Modules\Accreditation\Views\parameter_items\frmDocumentListForTagging'); ?>
 <?php  //echo view('parammeter_items/frmParameterItemModal'); ?>
