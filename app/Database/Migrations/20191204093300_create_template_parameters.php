@@ -265,7 +265,7 @@ class CreateTemplateParameters extends \CodeIgniter\Database\Migration {
                     [
                         'id'  => 27,
                         'parameter_code' => 'parameter d',
-                        'title' => 'Community Involvement and Participation',
+                        'title' => 'Community Involvement and Participation in the Institution\'s Activities',
                         'description' => 'Community Involvement and Participation',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
@@ -385,8 +385,8 @@ class CreateTemplateParameters extends \CodeIgniter\Database\Migration {
                     [
                         'id'  => 42,
                         'parameter_code' => 'parameter h',
-                        'title' => 'Food Services / Canteen',
-                        'description' => 'Food Services / Canteen',
+                        'title' => 'Food Services / Canteen /Cafeteria',
+                        'description' => 'Food Services / Canteen /Cafeteria',
                         'status' => 'a',
                         'created_at' => date('Y-m-d H:i:s')
                     ],
